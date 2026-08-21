@@ -1,0 +1,956 @@
+/* ==========================================================================
+   ECOSTEEL — DESIGN 3: PRECISION ENGINEERING
+   Technical Blueprint & Precision Industrial Design System
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Technical Precision Palette */
+  --bg-blueprint: #f8fafd;
+  --bg-grid-line: rgba(2, 132, 199, 0.06);
+  --bg-card: #ffffff;
+  --bg-dark-hud: #0b1329;
+  --bg-dark-panel: #111e38;
+
+  --text-graphite: #0f172a;
+  --text-slate: #334155;
+  --text-steel: #475569;
+  --text-muted: #64748b;
+  --text-blueprint-blue: #0284c7;
+  --text-cobalt: #0369a1;
+
+  --accent-cyan: #0ea5e9;
+  --accent-blue: #2563eb;
+  --accent-subtle: #e0f2fe;
+  --border-tech: #cbd5e1;
+  --border-active: #0284c7;
+
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --shadow-tech: 0 4px 12px rgba(11, 19, 41, 0.06);
+  --shadow-elevation: 0 12px 24px -4px rgba(11, 19, 41, 0.1);
+  --radius-tech: 6px;
+  --max-width: 1340px;
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+/* Reset & Blueprint Grid Background */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-slate);
+  background-color: var(--bg-blueprint);
+  background-image: 
+    linear-gradient(var(--bg-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Technical Specification Tag / Chip */
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-blueprint-blue);
+  background-color: var(--accent-subtle);
+  border: 1px solid rgba(2, 132, 199, 0.3);
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-tech);
+  letter-spacing: 0.04em;
+}
+
+.tech-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  font-weight: 700;
+  color: var(--text-graphite);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.tech-lead {
+  font-size: 1.125rem;
+  color: var(--text-steel);
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+/* Buttons */
+.btn-tech {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.75rem;
+  background-color: var(--text-blueprint-blue);
+  color: #ffffff;
+  border: 1px solid var(--text-blueprint-blue);
+  border-radius: var(--radius-tech);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+  transition: all var(--transition-fast);
+}
+
+.btn-tech:hover {
+  background-color: var(--text-cobalt);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.3);
+}
+
+.btn-tech-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.75rem;
+  background-color: #ffffff;
+  color: var(--text-graphite);
+  border: 1px solid var(--border-tech);
+  border-radius: var(--radius-tech);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-tech-outline:hover {
+  border-color: var(--text-blueprint-blue);
+  color: var(--text-blueprint-blue);
+  background-color: var(--accent-subtle);
+}
+
+/* Section Shell */
+.tech-section {
+  padding: 6rem 0;
+  position: relative;
+  border-bottom: 1px solid var(--border-tech);
+}
+
+.tech-section-alt {
+  background-color: #ffffff;
+}
+
+.tech-section-header {
+  margin-bottom: 3.5rem;
+}
+
+/* Crosshair Markers */
+.crosshair-corner {
+  position: relative;
+}
+
+.crosshair-corner::before, .crosshair-corner::after {
+  content: '+';
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-blueprint-blue);
+  line-height: 1;
+}
+
+.crosshair-corner::before { top: 8px; left: 8px; }
+.crosshair-corner::after { top: 8px; right: 8px; }
+
+/* ==========================================================================
+   01. TECHNICAL STATUS TOPBAR
+   ========================================================================== */
+.tech-topbar {
+  background-color: var(--bg-dark-hud);
+  color: #94a3b8;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tech-topbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #38bdf8;
+}
+
+.hud-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+/* ==========================================================================
+   02. TECHNICAL HEADER & NAVIGATION
+   ========================================================================== */
+.tech-header {
+  background-color: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-tech);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.tech-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+}
+
+.tech-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tech-logo img {
+  height: 44px;
+  width: auto;
+}
+
+.tech-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.tech-nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-steel);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-tech);
+  transition: all var(--transition-fast);
+}
+
+.tech-nav-link:hover, .tech-nav-link.active {
+  color: var(--text-blueprint-blue);
+  background-color: var(--accent-subtle);
+}
+
+.tech-nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border-tech);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-tech);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   03. SCHEMATIC HERO WITH INTERACTIVE COMPONENT HOTSPOTS
+   ========================================================================== */
+.schematic-hero {
+  padding: 4.5rem 0 5.5rem;
+  border-bottom: 1px solid var(--border-tech);
+  position: relative;
+}
+
+.schematic-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.schematic-hud {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid var(--border-tech);
+  border-radius: var(--radius-tech);
+  box-shadow: var(--shadow-elevation);
+  overflow: hidden;
+}
+
+.hud-topbar {
+  background-color: var(--bg-dark-hud);
+  color: #38bdf8;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hud-viewport {
+  position: relative;
+  height: 380px;
+  background-color: #f1f5f9;
+  overflow: hidden;
+}
+
+.hud-viewport img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Schematic Hotspots */
+.hotspot-pin {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background-color: rgba(2, 132, 199, 0.9);
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(2, 132, 199, 0.6);
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.hotspot-pin:hover, .hotspot-pin.active {
+  transform: scale(1.2);
+  background-color: #2563eb;
+}
+
+.hotspot-pin::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 1px solid #0284c7;
+  border-radius: 50%;
+  animation: pulseRing 2s infinite;
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.hud-data-panel {
+  padding: 1.25rem 1.5rem;
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-tech);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+.hud-data-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.hud-data-item span.label {
+  display: block;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.hud-data-item span.val {
+  font-weight: 700;
+  color: var(--text-graphite);
+}
+
+/* ==========================================================================
+   04. TECHNICAL SPECIFICATION MATRIX & PRODUCT FILTER
+   ========================================================================== */
+.filter-bar {
+  background-color: #ffffff;
+  border: 1px solid var(--border-tech);
+  border-radius: var(--radius-tech);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-blueprint);
+  border: 1px solid var(--border-tech);
+  border-radius: var(--radius-tech);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background-color: var(--text-blueprint-blue);
+  color: #ffffff;
+  border-color: var(--text-blueprint-blue);
+}
+
+.tech-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.tech-product-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-tech);
+  border-radius: var(--radius-tech);
+  overflow: hidden;
+  box-shadow: var(--shadow-tech);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-product-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-elevation);
+}
+
+.tech-card-header {
+  background-color: #f1f5f9;
+  border-bottom: 1px solid var(--border-tech);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
+
+.tech-card-media {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background-color: #f8fafc;
+}
+
+.tech-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.tech-product-card:hover .tech-card-media img {
+  transform: scale(1.05);
+}
+
+.tech-card-body {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-graphite);
+  margin-bottom: 0.5rem;
+}
+
+.tech-card-desc {
+  font-size: 0.875rem;
+  color: var(--text-steel);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.spec-table-mini {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  border-collapse: collapse;
+  margin-bottom: 1.25rem;
+}
+
+.spec-table-mini td {
+  padding: 0.375rem 0;
+  border-bottom: 1px solid rgba(203, 213, 225, 0.5);
+}
+
+.spec-table-mini td:first-child {
+  color: var(--text-muted);
+  width: 40%;
+}
+
+.spec-table-mini td:last-child {
+  font-weight: 600;
+  color: var(--text-graphite);
+}
+
+/* ==========================================================================
+   05. STANDARDS COMPLIANCE TABLE & SEARCH
+   ========================================================================== */
+.standards-table-wrapper {
+  background-color: #ffffff;
+  border: 1px solid var(--border-tech);
+  border-radius: var(--radius-tech);
+  overflow: hidden;
+  box-shadow: var(--shadow-tech);
+}
+
+.tech-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.tech-table th {
+  background-color: var(--bg-dark-hud);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1rem 1.25rem;
+}
+
+.tech-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-tech);
+  color: var(--text-slate);
+}
+
+.tech-table tr:hover td {
+  background-color: #f8fafd;
+}
+
+.tech-table td.code-cell {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-blueprint-blue);
+}
+
+/* ==========================================================================
+   06. QUALITY LAB TESTING PIPELINE (4 STAGES)
+   ========================================================================== */
+.pipeline-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.pipeline-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-tech);
+  border-radius: var(--radius-tech);
+  padding: 2rem 1.5rem;
+  position: relative;
+  box-shadow: var(--shadow-tech);
+}
+
+.pipeline-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: var(--text-blueprint-blue);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-tech);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.pipeline-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-graphite);
+  margin-bottom: 0.5rem;
+}
+
+.pipeline-card p {
+  font-size: 0.875rem;
+  color: var(--text-steel);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   07. SECTORS MATRIX
+   ========================================================================== */
+.tech-sectors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.tech-sector-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-tech);
+  border-radius: var(--radius-tech);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-sector-media {
+  height: 180px;
+  overflow: hidden;
+}
+
+.tech-sector-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tech-sector-body {
+  padding: 1.5rem;
+  flex-grow: 1;
+}
+
+.tech-sector-body h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-graphite);
+  margin-bottom: 0.5rem;
+}
+
+.tech-sector-body p {
+  font-size: 0.875rem;
+  color: var(--text-steel);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   08. TECHNICAL RFQ FORM
+   ========================================================================== */
+.tech-rfq-wrapper {
+  background-color: #ffffff;
+  border: 1px solid var(--border-tech);
+  border-radius: var(--radius-tech);
+  padding: 3rem;
+  box-shadow: var(--shadow-elevation);
+}
+
+.tech-form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.tech-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  margin-bottom: 1.25rem;
+}
+
+.tech-form-group label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-graphite);
+}
+
+.tech-input, .tech-select, .tech-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-tech);
+  border-radius: var(--radius-tech);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--text-graphite);
+  background-color: var(--bg-blueprint);
+}
+
+.tech-input:focus, .tech-select:focus, .tech-textarea:focus {
+  outline: none;
+  border-color: var(--text-blueprint-blue);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.tech-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ==========================================================================
+   09. ENGINEERING FOOTER
+   ========================================================================== */
+.tech-footer {
+  background-color: var(--bg-dark-hud);
+  color: #94a3b8;
+  padding: 5rem 0 2rem;
+  font-size: 0.875rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tech-footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.tech-footer-brand img {
+  height: 44px;
+  margin-bottom: 1.25rem;
+}
+
+.tech-footer-col h4 {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+}
+
+.tech-footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tech-footer-links a {
+  color: #94a3b8;
+}
+
+.tech-footer-links a:hover {
+  color: #38bdf8;
+}
+
+.tech-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .schematic-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .tech-products-grid, .pipeline-grid, .tech-sectors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tech-form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tech-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .tech-topbar {
+    display: none;
+  }
+
+  .tech-nav {
+    display: none;
+    position: fixed;
+    top: 76px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    flex-direction: column;
+    padding: 2rem;
+    align-items: flex-start;
+  }
+
+  .tech-nav.open {
+    display: flex;
+  }
+
+  .tech-nav-toggle {
+    display: block;
+  }
+
+  .tech-products-grid, .pipeline-grid, .tech-sectors-grid, .tech-form-grid, .tech-footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-rfq-wrapper {
+    padding: 2rem 1.5rem;
+  }
+}
+
+.auto-style-2e7f9c {
+    display: flex; gap: 1.5rem; align-items: center;
+}
+
+.auto-style-72dd82 {
+    display: flex; gap: 1.5rem; align-items: center;
+}
+
+.auto-style-dc5945 {
+    margin-top: 1rem;
+}
+
+.auto-style-8c81ba {
+    color: var(--text-blueprint-blue);
+}
+
+.auto-style-7037a4 {
+    margin-bottom: 2rem;
+}
+
+.auto-style-5f380d {
+    display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+}
+
+.auto-style-cb7a7d {
+    display: flex; gap: 2rem; border-top: 1px solid var(--border-tech); padding-top: 1.5rem; font-family: var(--font-mono); font-size: 0.8125rem;
+}
+
+.auto-style-e0d4ae {
+    top: 30%; left: 35%;
+}
+
+.auto-style-0239e3 {
+    top: 60%; left: 65%;
+}
+
+.auto-style-a4ecfa {
+    top: 25%; left: 75%;
+}
+
+.auto-style-3b26e6 {
+    top: 70%; left: 25%;
+}
+
+.auto-style-532770 {
+    margin-bottom: 0.75rem;
+}
+
+.auto-style-f156c9 {
+    font-size: 0.6875rem; color: var(--text-muted);
+}
+
+.auto-style-3b14c8 {
+    font-weight: 700; color: var(--text-blueprint-blue); font-size: 0.9375rem;
+}
+
+.auto-style-10d334 {
+    color: #16a34a;
+}
+
+.auto-style-1486a4 {
+    font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);
+}
+
+.auto-style-50a09a {
+    background-color: #dcfce7; color: #15803d; border-color: #86efac;
+}
+
+.auto-style-e8077b {
+    font-size: 2rem; margin-top: 0.5rem; margin-bottom: 0.5rem;
+}
+
+.auto-style-a31e76 {
+    font-size: 0.9375rem; color: var(--text-steel); margin-bottom: 2rem;
+}
+
+.auto-style-df92be {
+    display: none; padding: 1rem; border: 1px solid var(--border-tech); border-radius: var(--radius-tech); margin-bottom: 1.5rem; font-family: var(--font-mono); font-size: 0.8125rem;
+}
+
+.auto-style-6a8c40 {
+    width: 100%; justify-content: center; padding: 1.125rem;
+}
+
+.auto-style-dac86f {
+    font-size: 0.8125rem; line-height: 1.6; color: #cbd5e1;
+}
+
+.auto-style-816577 {
+    font-size: 0.8125rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 0.5rem;
+}
+
+.auto-style-7786b2 {
+    font-size: 0.8125rem; color: #cbd5e1; line-height: 1.6;
+}
+
+.auto-style-ca8322 {
+    color: #38bdf8;
+}

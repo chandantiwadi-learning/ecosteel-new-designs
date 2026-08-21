@@ -1,0 +1,1024 @@
+/* ==========================================================================
+   ECOSTEEL — DESIGN 2: INDUSTRIAL EDITORIAL
+   Premium Magazine & Engineering Storytelling Design System
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Editorial Palette */
+  --bg-page: #faf9f6;
+  --bg-surface: #f4f1eb;
+  --bg-pure: #ffffff;
+  --bg-dark: #121316;
+  --bg-dark-surface: #1b1c21;
+
+  --text-ebony: #121316;
+  --text-charcoal: #27272a;
+  --text-muted: #71717a;
+  --text-light: #a1a1aa;
+  --text-white: #ffffff;
+
+  --accent-copper: #c2410c;
+  --accent-ink: #0f172a;
+  --divider-subtle: rgba(18, 19, 22, 0.08);
+  --divider-strong: rgba(18, 19, 22, 0.2);
+
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', var(--font-sans);
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --max-width: 1360px;
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Typography */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-charcoal);
+  background-color: var(--bg-page);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--transition-normal);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Chapter Eyebrows & Headings */
+.chapter-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.chapter-tag::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background-color: var(--text-ebony);
+}
+
+.editorial-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.75rem, 5vw, 4.5rem);
+  font-weight: 400;
+  color: var(--text-ebony);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 2rem;
+}
+
+.editorial-lead {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: var(--text-charcoal);
+  line-height: 1.6;
+  max-width: 720px;
+}
+
+/* Editorial Buttons */
+.btn-editorial {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border: 1px solid var(--text-ebony);
+  background-color: var(--text-ebony);
+  color: var(--bg-page);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.btn-editorial:hover {
+  background-color: transparent;
+  color: var(--text-ebony);
+}
+
+.btn-editorial-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border: 1px solid var(--divider-strong);
+  background-color: transparent;
+  color: var(--text-ebony);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.btn-editorial-ghost:hover {
+  border-color: var(--text-ebony);
+  background-color: var(--bg-surface);
+}
+
+/* ==========================================================================
+   01. EDITORIAL MASTHEAD & HEADER
+   ========================================================================== */
+.editorial-masthead {
+  border-bottom: 1px solid var(--divider-subtle);
+  padding: 0.75rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.masthead-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.editorial-header {
+  position: sticky;
+  top: 0;
+  background-color: rgba(250, 249, 246, 0.95);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--divider-subtle);
+  z-index: 1000;
+  padding: 1.25rem 0;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-editorial {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-editorial img {
+  height: 42px;
+  width: auto;
+}
+
+.nav-editorial {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-editorial a {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-charcoal);
+  letter-spacing: 0.02em;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-editorial a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-ebony);
+  transition: width var(--transition-normal);
+}
+
+.nav-editorial a:hover::after, .nav-editorial a.active::after {
+  width: 100%;
+}
+
+.nav-toggle-editorial {
+  display: none;
+  background: none;
+  border: 1px solid var(--divider-strong);
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+/* ==========================================================================
+   02. EDITORIAL HERO
+   ========================================================================== */
+.hero-editorial {
+  padding: 5rem 0 6rem;
+  border-bottom: 1px solid var(--divider-subtle);
+}
+
+.hero-editorial-top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 4rem;
+  align-items: flex-end;
+  margin-bottom: 3.5rem;
+}
+
+.hero-display-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  font-weight: 400;
+  color: var(--text-ebony);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.hero-display-title span.italic {
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+.hero-curation-note {
+  border-left: 1px solid var(--divider-strong);
+  padding-left: 2rem;
+}
+
+.hero-curation-note p {
+  font-size: 1.125rem;
+  color: var(--text-charcoal);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.hero-broadsheet-media {
+  position: relative;
+}
+
+.hero-broadsheet-img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.hero-caption-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--divider-subtle);
+  margin-top: 0.75rem;
+}
+
+/* ==========================================================================
+   03. CHAPTER 01 — THE COMPANY CHRONICLE (ASYMMETRIC STORY)
+   ========================================================================== */
+.chronicle-section {
+  padding: 8rem 0;
+  border-bottom: 1px solid var(--divider-subtle);
+}
+
+.chronicle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.chronicle-portrait {
+  position: relative;
+}
+
+.chronicle-portrait img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+}
+
+.portrait-stamp {
+  position: absolute;
+  bottom: -24px;
+  right: -24px;
+  background-color: var(--text-ebony);
+  color: var(--bg-page);
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  max-width: 220px;
+  line-height: 1.5;
+}
+
+.chronicle-text p {
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-charcoal);
+}
+
+.chronicle-pullquote {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  line-height: 1.25;
+  color: var(--text-ebony);
+  padding: 2rem 0;
+  border-top: 1px solid var(--divider-strong);
+  border-bottom: 1px solid var(--divider-strong);
+  margin: 2.5rem 0;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   04. CHAPTER 02 — THE PRODUCT ANTHOLOGY
+   ========================================================================== */
+.anthology-section {
+  padding: 8rem 0;
+  border-bottom: 1px solid var(--divider-subtle);
+}
+
+.anthology-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.anthology-item {
+  display: grid;
+  grid-template-columns: 80px 1.5fr 1fr 180px;
+  gap: 3rem;
+  align-items: center;
+  padding: 3.5rem 0;
+  border-bottom: 1px solid var(--divider-subtle);
+  transition: background-color var(--transition-normal);
+}
+
+.anthology-item:hover {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+.anthology-number {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.anthology-title h3 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--text-ebony);
+  margin-bottom: 0.5rem;
+}
+
+.anthology-title p {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  max-width: 480px;
+}
+
+.anthology-specs {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-charcoal);
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.anthology-action {
+  text-align: right;
+}
+
+/* ==========================================================================
+   05. CHAPTER 03 — METALLURGICAL MASTERY
+   ========================================================================== */
+.metallurgy-section {
+  padding: 8rem 0;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--divider-subtle);
+}
+
+.metallurgy-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 3.5rem;
+}
+
+.editorial-alloy-card {
+  background-color: var(--bg-pure);
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--divider-subtle);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 380px;
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+.editorial-alloy-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--text-ebony);
+}
+
+.alloy-category-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-copper);
+}
+
+.alloy-name {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  color: var(--text-ebony);
+  margin: 0.75rem 0;
+}
+
+.alloy-desc {
+  font-size: 0.875rem;
+  color: var(--text-charcoal);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.alloy-grades-list {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--divider-subtle);
+  padding-top: 1rem;
+}
+
+/* ==========================================================================
+   06. CHAPTER 04 — ENGINEERING RIGOR (VERTICAL EDITORIAL TIMELINE)
+   ========================================================================== */
+.rigor-section {
+  padding: 8rem 0;
+  border-bottom: 1px solid var(--divider-subtle);
+}
+
+.rigor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 5rem;
+}
+
+.rigor-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.rigor-step {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 2rem;
+  border-top: 1px solid var(--divider-strong);
+  padding-top: 1.5rem;
+}
+
+.rigor-step-num {
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  color: var(--text-muted);
+}
+
+.rigor-step-content h3 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--text-ebony);
+  margin-bottom: 0.75rem;
+}
+
+.rigor-step-content p {
+  font-size: 1.0625rem;
+  color: var(--text-charcoal);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   07. CHAPTER 05 — SECTORS (FULL-BLEED EDITORIAL SLIDES)
+   ========================================================================== */
+.sectors-section {
+  padding: 8rem 0;
+  border-bottom: 1px solid var(--divider-subtle);
+}
+
+.sectors-editorial-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.sector-editorial-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.sector-editorial-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+}
+
+.sector-editorial-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  color: var(--text-ebony);
+  margin-bottom: 0.5rem;
+}
+
+.sector-editorial-card p {
+  font-size: 0.9375rem;
+  color: var(--text-charcoal);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   08. CHAPTER 06 — CLIENTS & INSPECTION ROSTER
+   ========================================================================== */
+.roster-section {
+  padding: 6rem 0;
+  border-bottom: 1px solid var(--divider-subtle);
+  background-color: var(--bg-pure);
+}
+
+.clients-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin: 3rem 0;
+  padding: 2rem 0;
+  border-top: 1px solid var(--divider-subtle);
+  border-bottom: 1px solid var(--divider-subtle);
+}
+
+.client-emblem img {
+  max-height: 48px;
+  filter: grayscale(100%);
+  opacity: 0.65;
+  transition: all var(--transition-fast);
+}
+
+.client-emblem:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.tpi-editorial-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.tpi-editorial-item {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--divider-strong);
+  color: var(--text-ebony);
+}
+
+/* ==========================================================================
+   09. CHAPTER 07 — TESTIMONIAL CHRONICLES
+   ========================================================================== */
+.chronicles-section {
+  padding: 8rem 0;
+  border-bottom: 1px solid var(--divider-subtle);
+}
+
+.chronicles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem;
+}
+
+.chronicle-quote-card {
+  border-left: 2px solid var(--text-ebony);
+  padding-left: 2.5rem;
+}
+
+.chronicle-quote-card q {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  line-height: 1.4;
+  color: var(--text-ebony);
+  display: block;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.chronicle-cite {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-charcoal);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.chronicle-cite img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   10. CHAPTER 08 — COMMERCIAL DIALOGUE (RFQ FORM)
+   ========================================================================== */
+.dialogue-section {
+  padding: 8rem 0;
+  background-color: var(--bg-pure);
+}
+
+.dialogue-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 6rem;
+}
+
+.dialogue-info h3 {
+  font-family: var(--font-serif);
+  font-size: 2.75rem;
+  color: var(--text-ebony);
+  margin-bottom: 1.5rem;
+}
+
+.dialogue-info p {
+  font-size: 1.125rem;
+  color: var(--text-charcoal);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.dialogue-data-block {
+  margin-bottom: 1.5rem;
+}
+
+.dialogue-data-block span.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.dialogue-data-block span.value {
+  font-size: 1rem;
+  color: var(--text-ebony);
+  font-weight: 500;
+}
+
+.dialogue-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dialogue-field-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.dialogue-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dialogue-field label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.dialogue-field input, .dialogue-field select, .dialogue-field textarea {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--divider-strong);
+  padding: 0.75rem 0;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  color: var(--text-ebony);
+  transition: border-color var(--transition-fast);
+}
+
+.dialogue-field input:focus, .dialogue-field select:focus, .dialogue-field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--text-ebony);
+}
+
+.dialogue-feedback {
+  display: none;
+  padding: 1rem;
+  border: 1px solid var(--text-ebony);
+  background-color: var(--bg-surface);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+/* ==========================================================================
+   11. EDITORIAL COLOPHON FOOTER
+   ========================================================================== */
+.editorial-footer {
+  background-color: var(--bg-dark);
+  color: #a1a1aa;
+  padding: 6rem 0 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-editorial-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
+  gap: 4rem;
+  margin-bottom: 5rem;
+}
+
+.colophon-brand img {
+  height: 40px;
+  margin-bottom: 1.5rem;
+  filter: brightness(0) invert(1);
+}
+
+.colophon-brand p {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: #d4d4d8;
+}
+
+.colophon-col h4 {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.colophon-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.colophon-links a:hover {
+  color: #ffffff;
+}
+
+.colophon-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   12. EDITORIAL DRAWER / MODAL
+   ========================================================================== */
+.editorial-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(18, 19, 22, 0.6);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+}
+
+.editorial-drawer-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.editorial-drawer {
+  background-color: var(--bg-page);
+  width: 100%;
+  max-width: 680px;
+  height: 100%;
+  overflow-y: auto;
+  padding: 4rem 3rem;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  transition: transform var(--transition-normal);
+  position: relative;
+}
+
+.editorial-drawer-overlay.open .editorial-drawer {
+  transform: translateX(0);
+}
+
+.drawer-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero-editorial-top, .chronicle-grid, .rigor-grid, .dialogue-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .anthology-item {
+    grid-template-columns: 60px 1.5fr 1fr;
+  }
+
+  .anthology-action {
+    grid-column: 2 / -1;
+    text-align: left;
+  }
+
+  .metallurgy-editorial-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sectors-editorial-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-editorial-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-editorial {
+    display: none;
+    position: fixed;
+    top: 75px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-page);
+    flex-direction: column;
+    padding: 3rem 2rem;
+    gap: 1.5rem;
+  }
+
+  .nav-editorial.open {
+    display: flex;
+  }
+
+  .nav-toggle-editorial {
+    display: block;
+  }
+
+  .anthology-item {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .metallurgy-editorial-grid, .chronicles-grid, .dialogue-field-group, .footer-editorial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .editorial-drawer {
+    padding: 3rem 1.5rem;
+  }
+}
+
+.auto-style-0c35d5 {
+    padding: 0.625rem 1.25rem; font-size: 0.8125rem;
+}
+
+.auto-style-67592e {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+}
+
+.auto-style-9d3007 {
+    display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; flex-wrap: wrap; gap: 2rem;
+}
+
+.auto-style-388c27 {
+    margin-bottom: 0;
+}
+
+.auto-style-dbb02f {
+    margin: 0; font-size: 1.0625rem;
+}
+
+.auto-style-1533b1 {
+    margin-bottom: 2rem;
+}
+
+.auto-style-f8a3c1 {
+    font-size: 1.0625rem; color: var(--text-charcoal); line-height: 1.7;
+}
+
+.auto-style-bb8ff7 {
+    text-align: center;
+}
+
+.auto-style-80d779 {
+    margin-bottom: 1rem;
+}
+
+.auto-style-e12354 {
+    margin: 0 auto 3rem;
+}
+
+.auto-style-5a6003 {
+    color: var(--text-ebony);
+}
+
+.auto-style-b248ec {
+    color: var(--text-ebony);
+}
+
+.auto-style-112341 {
+    color: var(--accent-copper); font-weight: 600;
+}
+
+.auto-style-a7f0d9 {
+    margin-bottom: 1.5rem;
+}
+
+.auto-style-664cb2 {
+    width: 100%; justify-content: center;
+}
+
+.auto-style-02eba4 {
+    font-size: 0.8125rem; color: #d4d4d8; line-height: 1.6; margin-bottom: 0.75rem;
+}
+
+.auto-style-d090e1 {
+    font-size: 0.8125rem; color: #d4d4d8; line-height: 1.6;
+}
+
+.auto-style-875c91 {
+    color: #ffffff;
+}
