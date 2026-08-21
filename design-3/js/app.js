@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tolerance: '±0.05mm Outer Diameter',
       schedule: 'SCH 40 / STD (Class 3000 PSI)',
       mtc: 'EN 10204 3.1 Traceable',
-      image: '../client/public/img/seamless-buttweld-pipe-fitting.jpg'
+      image: './assets/seamless-buttweld-pipe-fitting.jpg'
     },
     2: {
       comp: 'High-Pressure Forged Socketweld Tee',
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tolerance: 'Tolerance Class 6000 LBS',
       schedule: 'Class 6000 PSI Working Pressure',
       mtc: '100% Hydrostatic Tested',
-      image: '../client/public/img/forged-elbows.jpg'
+      image: './assets/forged-elbows.jpg'
     },
     3: {
       comp: 'Weld Neck Flange (Raised Face)',
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tolerance: 'Facing Finish: 125-250 AARH',
       schedule: 'Class 1500# Raised Face',
       mtc: 'Ultrasonic & PMI Verified',
-      image: '../client/public/img/product5.jpg'
+      image: './assets/product5.jpg'
     },
     4: {
       comp: 'ASTM A193 B7 Heavy Stud Bolt & 2H Nut',
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tolerance: 'Tensile Strength: 125 ksi min',
       schedule: 'High-Temperature Bolting',
       mtc: 'Charpy V-Notch Impact Tested',
-      image: '../client/public/img/product6.jpg'
+      image: './assets/product6.jpg'
     }
   };
 
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Buttweld Pipe Fittings',
       category: 'fittings',
       spec: 'ASME B16.9',
-      image: '../client/public/img/seamless-buttweld-pipe-fitting.jpg',
+      image: './assets/seamless-buttweld-pipe-fitting.jpg',
       desc: 'Seamless & welded elbows, tees, reducers and caps for high-pressure industrial lines.',
       size: '1/4" NB to 48" NB',
       rating: 'SCH 10 to SCH XXS',
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'High Pressure Forged Fittings',
       category: 'fittings',
       spec: 'ASME B16.11',
-      image: '../client/public/img/forged-elbows.jpg',
+      image: './assets/forged-elbows.jpg',
       desc: 'Socketweld and threaded fittings forged for extreme pressure fluid handling.',
       size: '1/2" NB to 4" NB',
       rating: 'Class 2000# to 9000#',
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Industrial Pipe Flanges',
       category: 'flanges',
       spec: 'ASME B16.5',
-      image: '../client/public/img/product5.jpg',
+      image: './assets/product5.jpg',
       desc: 'Weld Neck, Slip-On, Blind, RTJ, and Orifice flanges with precision gasket faces.',
       size: '1/2" to 48" NB',
       rating: 'Class 150# to 2500#',
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'High-Tensile Fasteners',
       category: 'fasteners',
       spec: 'ASTM A193 / A194',
-      image: '../client/public/img/product6.jpg',
+      image: './assets/product6.jpg',
       desc: 'Heavy hex bolts, stud bolts, nuts, and washers designed for thermal and pressure stress.',
       size: 'M2 to M80 / 1/8" to 3"',
       rating: 'Grade B7, B8, B8M, 2H',
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Pipes & Tubes',
       category: 'pipes',
       spec: 'ASTM A312 / A335',
-      image: '../client/public/img/product1.jpg',
+      image: './assets/product1.jpg',
       desc: 'Seamless and welded tubulars calibrated for tight dimensional wall tolerance.',
       size: '1/2" NB to 48" NB',
       rating: 'WT 1.0mm to 40.0mm',
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Plates & Sheets',
       category: 'plates',
       spec: 'ASTM A240 / A516',
-      image: '../client/public/img/product2.jpg',
+      image: './assets/product2.jpg',
       desc: 'Pressure vessel quality hot rolled and cold rolled plates with superior flatness.',
       size: '1mm to 200mm Thickness',
       rating: 'Widths up to 3000mm',
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Rods & Round Bars',
       category: 'bars',
       spec: 'ASTM A276 / A479',
-      image: '../client/public/img/product4.jpg',
+      image: './assets/product4.jpg',
       desc: 'Precision machined and centerless ground bars for shafts, valves, and tooling.',
       size: '3.17mm to 350mm Dia',
       rating: 'Tolerance: h9, h11',

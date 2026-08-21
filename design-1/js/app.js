@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Buttweld Pipe Fittings',
       category: 'fittings',
       badge: 'High Pressure',
-      image: '../client/public/img/seamless-buttweld-pipe-fitting.jpg',
+      image: './assets/seamless-buttweld-pipe-fitting.jpg',
       desc: 'High-precision seamless & welded buttweld fittings for industrial high-pressure piping systems.',
       longDesc: 'Eco Steel Engineering is a premier manufacturer, supplier, and exporter of high-grade Buttweld Pipe Fittings. Manufactured from top-tier raw materials, our fittings offer zero-defect precision, extreme corrosion resistance, and high structural strength for heavy-duty industrial applications.',
       sizeRange: '1/4" NB to 48" NB',
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Forged Fittings',
       category: 'fittings',
       badge: 'Extreme Pressure',
-      image: '../client/public/img/forged-elbows.jpg',
+      image: './assets/forged-elbows.jpg',
       desc: 'Heavy-duty socketweld and screwed-threaded forged fittings for extreme pressure environments.',
       longDesc: 'Eco Steel Engineering manufactures premium quality High Pressure Forged Socketweld & Threaded Fittings. Tested to strict international standards, these fittings deliver maximum tensile strength, leak-proof performance, and superior chemical resistance.',
       sizeRange: '1/2" NB to 4" NB',
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Pipe Flanges',
       category: 'flanges',
       badge: 'ASME / DIN',
-      image: '../client/public/img/product5.jpg',
+      image: './assets/product5.jpg',
       desc: 'Precision-engineered industrial pipe flanges, orifice flanges & plate flanges in high-performance alloys.',
       longDesc: 'Eco Steel Engineering is a leading global manufacturer and exporter of Industrial Pipe Flanges. Engineered for leak-proof pipe joints under high temperature and extreme pressure, our flanges conform strictly to ANSI, ASME, DIN, BS, and EN standards.',
       sizeRange: '1/2" to 48" (15 NB to 1200 NB)',
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Industrial Fasteners',
       category: 'fasteners',
       badge: 'High Tensile',
-      image: '../client/public/img/product6.jpg',
+      image: './assets/product6.jpg',
       desc: 'High-tensile corrosion-resistant industrial nuts, bolts, screws, washers & stud bolts.',
       longDesc: 'Eco Steel Engineering manufactures and stocks high-strength industrial Fasteners engineered for heavy structural assembly and harsh corrosive environments. Available in metric and imperial threading with custom dimensional tolerances.',
       sizeRange: 'M2 to M80 / 1/8" to 3"',
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Pipes & Tubes',
       category: 'pipes',
       badge: 'Seamless & Welded',
-      image: '../client/public/img/product1.jpg',
+      image: './assets/product1.jpg',
       desc: 'Seamless, ERW, EFW & welded pipes and tubes in round, square, and rectangular profiles.',
       longDesc: 'Eco Steel Engineering is a major stockholder, supplier, and exporter of high-grade Seamless and Welded Pipes & Tubes. Supplied to global industries, our piping products exhibit tight dimensional tolerances, high burst pressure resistance, and flawless surface finish.',
       sizeRange: '1/2" NB to 48" NB & OD (WT: 1mm to 40mm)',
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Plates & Sheets',
       category: 'plates',
       badge: 'Cut-to-Size',
-      image: '../client/public/img/product2.jpg',
+      image: './assets/product2.jpg',
       desc: 'Hot rolled & cold rolled steel sheets, heavy plates, coils and shim sheets.',
       longDesc: 'Eco Steel Engineering stocks and exports a vast range of high-durability Steel Plates, Sheets, and Coils. Available in customizable thicknesses and cut-to-size dimensions, our plates offer supreme flatness, high ductility, and excellent weldability.',
       sizeRange: '1mm to 200mm Thickness (Width up to 3000mm)',
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: 'Rods & Round Bars',
       category: 'bars',
       badge: 'Precision Machined',
-      image: '../client/public/img/product4.jpg',
+      image: './assets/product4.jpg',
       desc: 'Solid round, square, hex, and flat bars precision-machined for industrial engineering.',
       longDesc: 'Eco Steel Engineering is a key exporter of high-grade Metal Rods and Round Bars. Supplied with black, bright, polished, or centerless ground finishes, our bars offer exceptional straightness, uniform grain structure, and high machinability.',
       sizeRange: '3.17mm to 350mm Diameter (Length: 1m to 6m)',
@@ -415,25 +415,25 @@ document.addEventListener('DOMContentLoaded', () => {
       quote: "We have worked with Eco Steel for the past 8 years. They not only have met the project expectations but, have often brought improvements to both quality and value. These innovative ideas have helped us bring safety in steel erection to the forefront!",
       name: "Anne Pena",
       role: "Company CEO",
-      image: "../client/public/img/testim-1.jpg"
+      image: "./assets/testim-1.jpg"
     },
     {
       quote: "During the last four years Middiwest Steel Inc. and Eco Steel have cooperated on multiple projects on various sites. As both a supplier to Eco Steel and a Contractor each project has exhibited the highest level of organization, quality and integrity.",
       name: "Barrows A. David",
       role: "Project Manager",
-      image: "../client/public/img/testim3.jpg"
+      image: "./assets/testim3.jpg"
     },
     {
       quote: "Whether it is quoting, pricing or help with design, their courtesy and attention to detail has often times led us to winning bids and building projects that have been works we are all proud of.",
       name: "Julie Wright",
       role: "Company CEO",
-      image: "../client/public/img/testim-2.jpg"
+      image: "./assets/testim-2.jpg"
     },
     {
       quote: "We would like to take an opportunity to first of all thank you for your 5 years of services to our company. We have always appreciated your team efforts and superior quality of stainless steel Products.",
       name: "Mhd Saif Zuber",
       role: "Managing Director",
-      image: "../client/public/img/testim-04.jpg"
+      image: "./assets/testim-04.jpg"
     }
   ];
 
