@@ -1,90 +1,201 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { Link, useOutletContext } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { productsData } from '../data/products';
 
 const ProductsPage = () => {
+  const { onOpenRFQ } = useOutletContext();
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const categories = ['All', 'Fittings', 'Flanges', 'Pipes', 'Plates', 'Bars', 'Fasteners'];
+
+  const filteredProducts = productsData.filter((p) => {
+    const matchesCat = selectedCategory === 'All' || p.category === selectedCategory;
+    const q = searchQuery.toLowerCase().trim();
+    const matchesSearch =
+      q === '' ||
+      p.name.toLowerCase().includes(q) ||
+      p.shortDesc.toLowerCase().includes(q) ||
+      (p.materials && p.materials.some((m) => m.toLowerCase().includes(q))) ||
+      (p.standards && p.standards.some((s) => s.toLowerCase().includes(q)));
+    return matchesCat && matchesSearch;
+  });
+
   return (
-    <div className="bg-pure">
+    <div className="eco-products-page">
+      
       {/* Page Header */}
-      <section className="layout-section bg-offwhite" style={{ padding: '120px 0 80px', borderBottom: '1px solid var(--border-subtle)' }}>
-        <div className="layout-container" style={{ textAlign: 'center' }}>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="label-eyebrow">Product Catalog</span>
-            <h1 className="heading-hero" style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', marginBottom: '1.5rem' }}>Premium Industrial Products</h1>
-            <p className="text-lead" style={{ margin: '0 auto' }}>
-              We manufacture and supply a comprehensive range of piping components designed for high-pressure, extreme temperature, and corrosive environments.
-            </p>
-          </motion.div>
+      <section 
+        style={{ 
+          backgroundColor: 'var(--bg-dark-950)', 
+          color: '#ffffff', 
+          padding: '5rem 0 4rem',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+        }}
+      >
+        <div className="layout-container" style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', alignItems: 'center', fontSize: '0.8125rem', color: '#94a3b8', marginBottom: '1rem' }}>
+            <Link to="/" style={{ color: '#94a3b8' }}>Home</Link>
+            <span>/</span>
+            <span style={{ color: 'var(--brand-green-accent)', fontWeight: '600' }}>Products Catalog</span>
+          </div>
+
+          <span className="label-eyebrow on-dark" style={{ marginBottom: '0.5rem' }}>Full Production & Stockholding Range</span>
+          <h1 className="heading-hero on-dark" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.25rem' }}>
+            Industrial Product Systems
+          </h1>
+          <p className="text-lead on-dark">
+            Precision-manufactured buttweld fittings, high-pressure forged fittings, ANSI/DIN flanges, heavy fasteners, seamless pipes, and alloy plates engineered to international standards.
+          </p>
         </div>
       </section>
 
-      {/* Alternating Editorial Product List */}
-      <section className="layout-section">
+      {/* Filter & Search Bar */}
+      <section style={{ backgroundColor: 'var(--bg-dark-900)', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', padding: '1.5rem 0' }}>
+        <div className="layout-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.25rem' }}>
+          
+          {/* Category Tabs */}
+          <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                className={`category-tab-btn on-dark ${selectedCategory === cat ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(cat)}
+                style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Search Input */}
+          <div style={{ position: 'relative', width: '100%', maxWidth: '320px' }}>
+            <i className="fas fa-search" style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#64748b', fontSize: '0.875rem' }}></i>
+            <input
+              type="text"
+              placeholder="Search products or standards..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="form-input on-dark"
+              style={{ paddingLeft: '2.5rem', paddingRight: '1rem', paddingTop: '0.625rem', paddingBottom: '0.625rem', fontSize: '0.875rem' }}
+            />
+          </div>
+
+        </div>
+      </section>
+
+      {/* Main Catalog Grid */}
+      <section className="layout-section section-light">
         <div className="layout-container">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8rem' }}>
-            {productsData.map((prod, idx) => {
-              const isEven = idx % 2 === 0;
-              
-              return (
-                <motion.div 
-                  key={prod.id}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-                  style={{ 
-                    display: 'grid', 
-                    gridTemplateColumns: '1fr 1fr', 
-                    gap: '6rem', 
-                    alignItems: 'center',
-                    direction: isEven ? 'ltr' : 'rtl' // Quick trick for alternating layout
-                  }}
+          
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
+            <div style={{ fontSize: '0.9375rem', color: 'var(--text-dark-muted)', fontWeight: '600' }}>
+              Showing <strong style={{ color: 'var(--text-dark-primary)' }}>{filteredProducts.length}</strong> Industrial Product Line{filteredProducts.length === 1 ? '' : 's'}
+            </div>
+            <button 
+              className="btn-secondary" 
+              onClick={() => onOpenRFQ()}
+              style={{ padding: '0.625rem 1.25rem', fontSize: '0.875rem' }}
+            >
+              <i className="fas fa-file-contract"></i> Submit Package BOM
+            </button>
+          </div>
+
+          <motion.div layout className="grid-catalog">
+            <AnimatePresence>
+              {filteredProducts.map((p) => (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  key={p.id}
+                  className="product-card-premium"
                 >
-                  {/* Image Column */}
-                  <div style={{ direction: 'ltr', position: 'relative', height: '600px', borderRadius: 'var(--radius-sm)', overflow: 'hidden' }}>
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'var(--bg-surface)' }}></div>
-                    <img src={prod.image} alt={prod.name} style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'relative', zIndex: 1 }} />
+                  <div className="product-card-img-wrap">
+                    <img src={p.image} alt={p.name} loading="lazy" />
+                    <span 
+                      style={{ 
+                        position: 'absolute', 
+                        top: '1rem', 
+                        left: '1rem', 
+                        backgroundColor: '#ffffff', 
+                        color: 'var(--brand-green)', 
+                        fontFamily: 'var(--font-mono)', 
+                        fontSize: '0.75rem', 
+                        fontWeight: '700', 
+                        padding: '0.25rem 0.6rem', 
+                        borderRadius: 'var(--radius-xs)',
+                        boxShadow: 'var(--shadow-subtle)',
+                        border: '1px solid var(--border-light)'
+                      }}
+                    >
+                      {p.category}
+                    </span>
                   </div>
 
-                  {/* Text Column */}
-                  <div style={{ direction: 'ltr' }}>
-                    <span className="label-eyebrow" style={{ color: 'var(--accent-blue)' }}>{prod.category}</span>
-                    <h2 className="heading-section" style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>{prod.name}</h2>
-                    <p className="text-lead" style={{ marginBottom: '2.5rem' }}>{prod.longDesc || prod.shortDesc}</p>
-                    
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '3rem' }}>
-                      {prod.materials && prod.materials.slice(0, 4).map((mat, mIdx) => (
-                        <span key={mIdx} style={{ padding: '0.5rem 1rem', border: '1px solid var(--border-subtle)', fontSize: '0.875rem', fontWeight: '600', color: 'var(--text-navy)' }}>
-                          {mat}
-                        </span>
-                      ))}
-                      {prod.materials && prod.materials.length > 4 && (
-                        <span style={{ padding: '0.5rem 1rem', border: '1px solid transparent', fontSize: '0.875rem', color: 'var(--text-slate)' }}>
-                          +{prod.materials.length - 4} more
-                        </span>
+                  <div className="product-card-body">
+                    <h3 className="heading-card" style={{ fontSize: '1.375rem', marginBottom: '0.75rem' }}>
+                      {p.name}
+                    </h3>
+                    <p style={{ color: 'var(--text-dark-secondary)', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem', flex: 1 }}>
+                      {p.shortDesc}
+                    </p>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: '1.5rem', fontSize: '0.8125rem', color: 'var(--text-dark-secondary)', backgroundColor: 'var(--bg-surface)', padding: '0.875rem', borderRadius: 'var(--radius-xs)' }}>
+                      <div><strong>Size Range:</strong> {p.sizeRange ? p.sizeRange.split('(')[0] : 'All sizes'}</div>
+                      <div><strong>Standards:</strong> {p.standards ? p.standards.slice(0, 3).join(', ') : 'ASME / ASTM'}</div>
+                      {p.classRatings && (
+                        <div><strong>Ratings:</strong> {p.classRatings.slice(0, 4).join(', ')}</div>
                       )}
                     </div>
 
-                    <Link to={`/products/${prod.slug}`} className="btn-link" style={{ fontSize: '1.125rem' }}>
-                      Explore Technical Specifications <i className="fas fa-arrow-right"></i>
-                    </Link>
+                    <div className="product-card-specs">
+                      <Link 
+                        to={`/products/${p.slug}`} 
+                        className="btn-primary"
+                        style={{ flex: 1, padding: '0.75rem 1rem', fontSize: '0.875rem' }}
+                      >
+                        Technical Data Sheet <i className="fas fa-arrow-right" style={{ fontSize: '0.75rem' }}></i>
+                      </Link>
+                      <button
+                        onClick={() => onOpenRFQ(p.name)}
+                        className="btn-secondary"
+                        style={{ padding: '0.75rem 1rem', fontSize: '0.875rem' }}
+                      >
+                        RFQ
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
-              );
-            })}
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* Bottom Custom Fabrication Banner */}
+      <section className="layout-section section-surface" style={{ borderTop: '1px solid var(--border-light)' }}>
+        <div className="layout-container" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+          <span className="label-eyebrow">Custom Engineering & Machining</span>
+          <h2 className="heading-section">Require Custom Dimensions or Non-Standard Forgings?</h2>
+          <p className="text-lead" style={{ marginBottom: '2.5rem' }}>
+            We fabricate special wall thicknesses, custom flange facings (RTJ, Tongue & Groove), bespoke stud lengths, and specialized machining strictly per client engineering drawings.
+          </p>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button className="btn-primary" onClick={() => onOpenRFQ('Custom Forging & Fabrication')}>
+              <i className="fas fa-file-upload"></i> Upload Drawing for Custom Quote
+            </button>
+            <Link to="/contact-us" className="btn-secondary">
+              Contact Engineering Desk
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="layout-section bg-surface" style={{ textAlign: 'center', padding: '100px 0' }}>
-        <div className="layout-container">
-          <h2 className="heading-section" style={{ marginBottom: '1.5rem' }}>Require Custom Dimensions?</h2>
-          <p className="text-lead" style={{ margin: '0 auto 3rem' }}>We provide bespoke manufacturing services tailored to specific drawing requirements.</p>
-          <Link to="/contact-us" className="btn-primary">Contact Engineering Team</Link>
-        </div>
-      </section>
     </div>
   );
 };

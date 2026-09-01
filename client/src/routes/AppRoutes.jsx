@@ -28,6 +28,15 @@ const AppRoutes = () => {
         <Route path="resources" element={<ResourcesPage />} />
         <Route path="contact-us" element={<ContactUs />} />
 
+        {/* Clean Direct Product Route Aliases */}
+        <Route path="butt-weld-pipe-fittings" element={<Navigate to="/products/butt-weld-pipe-fittings" replace />} />
+        <Route path="forged-fittings" element={<Navigate to="/products/forged-fittings" replace />} />
+        <Route path="flanges" element={<Navigate to="/products/flanges" replace />} />
+        <Route path="fasteners" element={<Navigate to="/products/fasteners" replace />} />
+        <Route path="pipes-and-tubes" element={<Navigate to="/products/pipes-and-tubes" replace />} />
+        <Route path="plates-and-sheets" element={<Navigate to="/products/plates-and-sheets" replace />} />
+        <Route path="rods" element={<Navigate to="/products/rods" replace />} />
+
         {/* Legacy .html Aliases for SEO Backwards Compatibility */}
         <Route path="index.html" element={<Navigate to="/" replace />} />
         <Route path="about-us.html" element={<Navigate to="/about-us" replace />} />

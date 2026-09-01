@@ -1,79 +1,175 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { Link, useOutletContext } from 'react-router-dom';
 
 const AboutUs = () => {
+  const { onOpenRFQ } = useOutletContext();
+
   return (
-    <div className="bg-pure">
+    <div className="eco-about-page">
+      
       {/* Page Header */}
-      <section className="layout-section bg-offwhite" style={{ padding: '120px 0 80px', borderBottom: '1px solid var(--border-subtle)' }}>
-        <div className="layout-container" style={{ textAlign: 'center' }}>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="label-eyebrow">Company Profile</span>
-            <h1 className="heading-hero" style={{ fontSize: 'clamp(3rem, 5vw, 4.5rem)', marginBottom: '1.5rem' }}>Eco Steel Engineering</h1>
-            <p className="text-lead" style={{ margin: '0 auto' }}>
-              We are a premier global manufacturer and stockholder of industrial steel piping products, committed to metallurgical precision and operational excellence.
-            </p>
-          </motion.div>
+      <section 
+        style={{ 
+          backgroundColor: 'var(--bg-dark-950)', 
+          color: '#ffffff', 
+          padding: '5rem 0 4rem',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+        }}
+      >
+        <div className="layout-container" style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', alignItems: 'center', fontSize: '0.8125rem', color: '#94a3b8', marginBottom: '1rem' }}>
+            <Link to="/" style={{ color: '#94a3b8' }}>Home</Link>
+            <span>/</span>
+            <span style={{ color: 'var(--brand-green-accent)', fontWeight: '600' }}>About Us</span>
+          </div>
+
+          <span className="label-eyebrow on-dark" style={{ marginBottom: '0.5rem' }}>Decades of Metallurgical Excellence</span>
+          <h1 className="heading-hero on-dark" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.25rem' }}>
+            Eco Steel Engineering
+          </h1>
+          <p className="text-lead on-dark">
+            A trusted international manufacturer, stockholder, supplier, and exporter of high-integrity piping components, flanges, fittings, and specialty alloys for critical industrial infrastructure.
+          </p>
         </div>
       </section>
 
-      {/* Corporate Overview Split Layout */}
-      <section className="layout-section">
+      {/* Foundation & Heritage Split */}
+      <section className="layout-section section-light">
         <div className="layout-container">
           <div className="editorial-grid">
-            <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.8 }}>
-              <span className="label-eyebrow" style={{ color: 'var(--accent-blue)' }}>Our Foundation</span>
-              <h2 className="heading-section">Decades of Industrial Reliability.</h2>
-              <p className="text-lead" style={{ marginBottom: '2rem' }}>
-                Eco Steel Engineering was founded on the principle that critical industries cannot afford material failure. We have built our reputation by supplying zero-defect piping components to the world's most demanding environments.
-              </p>
-              <p style={{ color: 'var(--text-slate)', fontSize: '1.125rem', marginBottom: '1rem' }}>
-                <strong>Quality First:</strong> We operate under a strict ISO 9001:2015 certified quality management system.
-              </p>
-              <p style={{ color: 'var(--text-slate)', fontSize: '1.125rem' }}>
-                <strong>Global Reach:</strong> With deep stockholding and robust logistics, we export to over 48 countries across the Middle East, Europe, and Asia.
-              </p>
-            </motion.div>
             
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} style={{ display: 'flex', justifyContent: 'center' }}>
-              <img src="/img/foundation-editorial.png" alt="Steel Forging Process" style={{ width: '80%', aspectRatio: '4/5', objectFit: 'cover', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-float)' }} />
-            </motion.div>
+            <div>
+              <span className="label-eyebrow">Our Foundation</span>
+              <h2 className="heading-section">
+                Engineering Precision.<br />
+                <span style={{ color: 'var(--brand-green)' }}>Built for Harsh Environments.</span>
+              </h2>
+              <p className="text-lead" style={{ marginBottom: '1.5rem' }}>
+                Eco Steel Engineering was established with a singular objective: to eliminate component failure in high-pressure, extreme-temperature, and corrosive industrial applications.
+              </p>
+              <p style={{ color: 'var(--text-dark-secondary)', lineHeight: '1.7', marginBottom: '1.5rem' }}>
+                From our corporate headquarters in Mumbai and manufacturing facilities in Vasai, Maharashtra, we manage extensive stockholding of raw billets, forgings, seamless pipes, and plates. Every item is traceable to its primary heat number and verified via in-house PMI optical emission spectrometry.
+              </p>
+              
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', margin: '2rem 0' }}>
+                <div style={{ backgroundColor: 'var(--bg-surface)', padding: '1.25rem', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--brand-green)' }}>
+                  <div style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--text-dark-primary)', fontFamily: 'var(--font-display)' }}>48+</div>
+                  <div style={{ fontSize: '0.8125rem', color: 'var(--text-dark-muted)', fontWeight: '600' }}>Export Destinations</div>
+                </div>
+                <div style={{ backgroundColor: 'var(--bg-surface)', padding: '1.25rem', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--brand-blue)' }}>
+                  <div style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--text-dark-primary)', fontFamily: 'var(--font-display)' }}>ISO 9001</div>
+                  <div style={{ fontSize: '0.8125rem', color: 'var(--text-dark-muted)', fontWeight: '600' }}>2015 Certified QMS</div>
+                </div>
+              </div>
+
+              <button className="btn-primary" onClick={() => onOpenRFQ()}>
+                <i className="fas fa-file-contract"></i> Contact Engineering Sales Desk
+              </button>
+            </div>
+
+            <div style={{ position: 'relative' }}>
+              <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', boxShadow: 'var(--shadow-elevated)', border: '1px solid var(--border-light)' }}>
+                <img 
+                  src="/img/foundation-editorial.png" 
+                  alt="Eco Steel Engineering Forging and Stockholding" 
+                  style={{ width: '100%', height: 'auto', display: 'block' }}
+                />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Vision & Mission */}
-      <section className="layout-section bg-surface">
+      {/* Facilities & Capabilities */}
+      <section className="layout-section section-dark">
         <div className="layout-container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }}>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} 
-              whileHover={{ y: -10, boxShadow: '0 20px 40px -10px rgba(10, 17, 40, 0.12)' }}
-              transition={{ duration: 0.3 }}
-              style={{ background: 'var(--bg-pure)', padding: '4rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)' }}
-            >
-              <span className="label-eyebrow">Our Vision</span>
-              <h3 className="heading-card" style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--text-navy)' }}>Leading the Global Supply Chain</h3>
-              <p style={{ color: 'var(--text-slate)', fontSize: '1.125rem', margin: 0, lineHeight: 1.8 }}>
-                To be the most trusted and preferred partner for industrial piping solutions globally, recognized for our metallurgical expertise, unwavering quality, and commitment to sustainable engineering practices.
-              </p>
-            </motion.div>
+          
+          <div className="section-header text-center">
+            <span className="label-eyebrow on-dark">Operational Infrastructure</span>
+            <h2 className="heading-section on-dark">Manufacturing & Stockholding Facilities</h2>
+            <p className="text-lead on-dark" style={{ margin: '0 auto' }}>
+              Strategic manufacturing and warehouse nodes ensuring rapid dispatch to international seaports and airports.
+            </p>
+          </div>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} 
-              whileHover={{ y: -10, boxShadow: '0 20px 40px -10px rgba(10, 17, 40, 0.12)' }}
-              transition={{ duration: 0.3, delay: 0.1 }} 
-              style={{ background: 'var(--bg-pure)', padding: '4rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)' }}
-            >
-              <span className="label-eyebrow">Our Mission</span>
-              <h3 className="heading-card" style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--text-navy)' }}>Precision in Every Order</h3>
-              <p style={{ color: 'var(--text-slate)', fontSize: '1.125rem', margin: 0, lineHeight: 1.8 }}>
-                To consistently deliver defect-free products on time, providing our clients in critical sectors with materials they can trust, backed by complete transparency and technical support.
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+            
+            <div className="card-industrial on-dark">
+              <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-sm)', backgroundColor: 'rgba(34, 197, 94, 0.12)', color: 'var(--brand-green-accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', marginBottom: '1.25rem' }}>
+                <i className="fas fa-industry"></i>
+              </div>
+              <h3 className="heading-card on-dark" style={{ fontSize: '1.25rem', marginBottom: '0.75rem' }}>
+                Manufacturing Plant (Vasai, Thane)
+              </h3>
+              <p style={{ color: '#94a3b8', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>
+                Equipped with heavy forging hammers, CNC lathes, beveling stations, heat-treatment furnaces, and hydrostatic testing apparatus.
               </p>
-            </motion.div>
+              <div style={{ fontSize: '0.8125rem', color: '#cbd5e1', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.75rem' }}>
+                Location: G7, Unit 11, Dhumal Nagar, Waliv, Vasai East, Thane – 401208, Maharashtra.
+              </div>
+            </div>
+
+            <div className="card-industrial on-dark">
+              <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-sm)', backgroundColor: 'rgba(2, 132, 199, 0.12)', color: 'var(--brand-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', marginBottom: '1.25rem' }}>
+                <i className="fas fa-building"></i>
+              </div>
+              <h3 className="heading-card on-dark" style={{ fontSize: '1.25rem', marginBottom: '0.75rem' }}>
+                Corporate Office (Mumbai)
+              </h3>
+              <p style={{ color: '#94a3b8', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>
+                Commercial headquarters managing international contracts, technical sales, tender documentation, export logistics, and client coordination.
+              </p>
+              <div style={{ fontSize: '0.8125rem', color: '#cbd5e1', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.75rem' }}>
+                Location: 107/111, Matka Building, Dr. M. G. Mahimtura Marg, 3rd Kumbharwada, Mumbai – 400 004.
+              </div>
+            </div>
+
+            <div className="card-industrial on-dark">
+              <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-sm)', backgroundColor: 'rgba(245, 158, 11, 0.12)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', marginBottom: '1.25rem' }}>
+                <i className="fas fa-boxes"></i>
+              </div>
+              <h3 className="heading-card on-dark" style={{ fontSize: '1.25rem', marginBottom: '0.75rem' }}>
+                Export Packaging & Stockyard
+              </h3>
+              <p style={{ color: '#94a3b8', fontSize: '0.875rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>
+                Specialized fumigated wooden crating, plastic end caps, rust-preventive oil coating, and steel strapping for secure sea and air freight.
+              </p>
+              <div style={{ fontSize: '0.8125rem', color: '#cbd5e1', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.75rem' }}>
+                Proximity to JNPT Port and Mumbai International Airport.
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* Vision & Mission Split */}
+      <section className="layout-section section-surface">
+        <div className="layout-container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem' }}>
+            
+            <div style={{ backgroundColor: '#ffffff', padding: '3rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-card)' }}>
+              <span className="label-eyebrow">Strategic Vision</span>
+              <h3 className="heading-card" style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>Global Supply Chain Benchmark</h3>
+              <p style={{ color: 'var(--text-dark-secondary)', lineHeight: '1.8', margin: 0 }}>
+                To be recognized worldwide as the most dependable and technically proficient partner for industrial steel piping solutions, setting industry standards for metallurgical precision, transparent certification, and ethical business conduct.
+              </p>
+            </div>
+
+            <div style={{ backgroundColor: '#ffffff', padding: '3rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', boxShadow: 'var(--shadow-card)' }}>
+              <span className="label-eyebrow">Corporate Mission</span>
+              <h3 className="heading-card" style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>Zero-Defect Delivery On Time</h3>
+              <p style={{ color: 'var(--text-dark-secondary)', lineHeight: '1.8', margin: 0 }}>
+                To consistently supply defect-free, rigorously tested piping components that empower global industries to operate safely and efficiently, backed by complete material traceability, technical expertise, and rapid responsive logistics.
+              </p>
+            </div>
+
           </div>
         </div>
       </section>
+
     </div>
   );
 };

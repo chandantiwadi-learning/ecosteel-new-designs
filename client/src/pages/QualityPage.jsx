@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 
 const QualityPage = () => {
   const { onOpenRFQ } = useOutletContext();

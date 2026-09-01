@@ -1,33 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
 const NotFound = () => {
   return (
-    <div className="layout-section bg-offwhite" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
-      <div className="layout-container" style={{ width: '100%' }}>
-        <div style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="label-eyebrow" style={{ color: 'var(--accent-blue)', marginBottom: '1rem' }}>Error 404</span>
-            <h1 className="heading-hero" style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>Page Not Found</h1>
-            <p className="text-lead" style={{ margin: '0 auto 3rem' }}>
-              The page you are looking for doesn't exist or has been moved. Let's get you back to exploring our industrial solutions.
-            </p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-              <Link to="/" className="btn-primary">
-                Return to Homepage
-              </Link>
-              <Link to="/products" className="btn-secondary">
-                View All Products
-              </Link>
-            </div>
-          </motion.div>
+    <div className="eco-notfound-page">
+      <section 
+        style={{ 
+          backgroundColor: 'var(--bg-dark-950)', 
+          color: '#ffffff', 
+          minHeight: '70vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '6rem 1.5rem',
+          textAlign: 'center'
+        }}
+      >
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <div style={{ fontSize: '6rem', fontWeight: '900', color: 'var(--brand-green-accent)', fontFamily: 'var(--font-mono)', lineHeight: 1, marginBottom: '1.5rem' }}>
+            404
+          </div>
+          <h1 className="heading-section on-dark" style={{ marginBottom: '1rem' }}>
+            Specification Page Not Found
+          </h1>
+          <p className="text-lead on-dark" style={{ marginBottom: '2.5rem' }}>
+            The requested technical document, catalog route, or resource URL may have moved or been updated under our standard engineering directory.
+          </p>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/" className="btn-primary" style={{ padding: '0.875rem 2rem' }}>
+              <i className="fas fa-home"></i> Return to Homepage
+            </Link>
+            <Link to="/products" className="btn-secondary on-dark" style={{ padding: '0.875rem 2rem' }}>
+              Explore Products Catalog
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
