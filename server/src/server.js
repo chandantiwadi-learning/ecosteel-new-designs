@@ -2,9 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const config = require('./config/env');
+const connectDB = require('./config/db');
 const contactRoutes = require('./routes/contactRoutes');
 const rfqRoutes = require('./routes/rfqRoutes');
 const { errorHandler } = require('./middleware/errorMiddleware');
+
+connectDB();
 
 const app = express();
 

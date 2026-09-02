@@ -1,168 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 
-const Navbar = ({ isHome = false }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleNav = () => setIsOpen(!isOpen);
-  const closeNav = () => {
-    setIsOpen(false);
-    setIsDropdownOpen(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
-  const isActive = (path) => location.pathname === path || location.pathname === `${path}.html`;
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
-    <header className="main-header">
-      <div className={`k-nav all-light ${isScrolled ? 'k-nav-fixed' : ''} ${isOpen ? 'k-nav-open' : ''}`}>
-        <div className="k-nav-toggle" onClick={toggleNav}>
-          <span></span>
-        </div>
-        <div className={`k-nav-outside ${isOpen ? 'show' : ''}`}>
-          <div className={`k-nav-inside ${isOpen ? 'show' : ''}`} id="k-nav-inside">
-            <div className="col-md-3">
-              <Link to="/" className="k-nav-logo" onClick={closeNav}>
-                <img
-                  src={isHome ? '/img/index-eco-logo.png' : '/img/1new-eco_logo.png'}
-                  alt="Eco Steel Logo"
-                  className="img-responsive logo-light"
-                />
-                <img
-                  src="/img/new-eco_logo.png"
-                  alt="Eco Steel Logo"
-                  className="img-responsive logo-dark"
-                />
-              </Link>
-            </div>
+    <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="container navbar-inner">
+        <a href="#home" className="logo-brand">
+          <img src="/assets/index-eco-logo.png" alt="Eco Steel Engineering Logo" />
+        </a>
 
-            <div className="col-md-9">
-              <div className="container">
-                <div className="std1" style={{ color: !isHome || isScrolled ? '#444' : undefined }}>
-                  <span>ISO 9001:2015 EMS & OHSAS</span> |{' '}
-                  <span>QMS ISO 9001:2015</span> |{' '}
-                  <span>EMS ISO 14001:2015</span> |{' '}
-                  <span>OHSAS ISO 18001:2007</span> |{' '}
-                  <span>PED CERTIFIED</span>
-                </div>
-
-                <ul className={`k-nav-links ${isHome ? 'index-pg' : ''}`}>
-                  <li>
-                    <Link
-                      to="/"
-                      style={{ color: !isHome || isScrolled ? '#444' : undefined }}
-                      id={isActive('/') ? 'hover-menu3' : undefined}
-                      className={isActive('/') ? '' : 'hover-menu'}
-                      onClick={closeNav}
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/about-us"
-                      style={{ color: !isHome || isScrolled ? '#444' : undefined }}
-                      id={isActive('/about-us') ? 'hover-menu3' : undefined}
-                      className={isActive('/about-us') ? '' : 'hover-menu'}
-                      onClick={closeNav}
-                    >
-                      About
-                    </Link>
-                  </li>
-                  <li
-                    className={`dropdown ${isDropdownOpen ? 'open' : ''}`}
-                    onMouseEnter={() => setIsDropdownOpen(true)}
-                    onMouseLeave={() => setIsDropdownOpen(false)}
-                  >
-                    <a
-                      href="#products"
-                      style={{ color: !isHome || isScrolled ? '#444' : undefined }}
-                      className="dropdown-toggle hover-menu"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setIsDropdownOpen(!isDropdownOpen);
-                      }}
-                    >
-                      Products
-                    </a>
-                    <ul className="dropdown-menu" style={{ display: isDropdownOpen ? 'block' : undefined }}>
-                      <li>
-                        <Link to="/butt-weld-pipe-fittings" onClick={closeNav}>
-                          Buttweld Pipe Fittings
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/forged-fittings" onClick={closeNav}>
-                          Forged Fittings
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/flanges" onClick={closeNav}>
-                          Flanges
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/fasteners" onClick={closeNav}>
-                          Fasteners
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/pipes-and-tubes" onClick={closeNav}>
-                          Pipes & Tubes
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/rods" onClick={closeNav}>
-                          Rods
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/plates-and-sheets" onClick={closeNav}>
-                          Plates & Sheets
-                        </Link>
-                      </li>
+        <nav>
+          <ul className={`nav-menu ${isMenuOpen ? 'open' : ''}`} id="navMenu">
+            <li className="nav-item"><a href="#home" className="nav-link active" onClick={closeMenu}>Home</a></li>
+            <li className="nav-item"><a href="#about" className="nav-link" onClick={closeMenu}>Company</a></li>
+            <li className="nav-item">
+              <a href="#products" className="nav-link">Products <i className="fas fa-chevron-down"></i></a>
+              <div className="mega-menu">
+                <div className="mega-menu-grid">
+                  <div className="mega-menu-col">
+                    <h4>Piping & Fastening Components</h4>
+                    <ul className="mega-menu-links">
+                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Buttweld Pipe Fittings</span> <span className="badge">ASME B16.9</span></a></li>
+                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Forged Fittings</span> <span className="badge">3000# - 9000#</span></a></li>
+                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Industrial Pipe Flanges</span> <span className="badge">ASME B16.5</span></a></li>
+                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>High-Tensile Fasteners</span> <span className="badge">B7 / B8 / 2H</span></a></li>
                     </ul>
-                  </li>
-                  <li>
-                    <Link
-                      to="/quality"
-                      style={{ color: !isHome || isScrolled ? '#444' : undefined }}
-                      id={isActive('/quality') ? 'hover-menu3' : undefined}
-                      className={isActive('/quality') ? '' : 'hover-menu'}
-                      onClick={closeNav}
-                    >
-                      Quality
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/contact-us"
-                      style={{ color: !isHome || isScrolled ? '#444' : undefined }}
-                      id={isActive('/contact-us') ? 'hover-menu3' : undefined}
-                      className={isActive('/contact-us') ? '' : 'hover-menu'}
-                      onClick={closeNav}
-                    >
-                      Contact Us
-                    </Link>
-                  </li>
-                </ul>
+                  </div>
+                  <div className="mega-menu-col">
+                    <h4>Mill Forms & Structural</h4>
+                    <ul className="mega-menu-links">
+                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Pipes & Tubes</span> <span className="badge">Seamless / Welded</span></a></li>
+                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Plates, Sheets & Coils</span> <span className="badge">1mm - 200mm</span></a></li>
+                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Rods & Round Bars</span> <span className="badge">Precision Ground</span></a></li>
+                      <li><a href="#materials" className="mega-link" onClick={closeMenu}><span>Specialty Alloys & Superalloys</span> <span className="badge">Inconel / Monel</span></a></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </li>
+            <li className="nav-item"><a href="#materials" className="nav-link" onClick={closeMenu}>Materials</a></li>
+            <li className="nav-item"><a href="#quality" className="nav-link" onClick={closeMenu}>Quality Assurance</a></li>
+            <li className="nav-item"><a href="#industries" className="nav-link" onClick={closeMenu}>Industries</a></li>
+            <li className="nav-item"><a href="#clients" className="nav-link" onClick={closeMenu}>Clients</a></li>
+          </ul>
+        </nav>
+
+        <div className="navbar-actions">
+          <a href="#contact" className="btn btn-primary">
+            <i className="fas fa-file-invoice"></i> Contact Us
+          </a>
+          <button className="nav-toggle" id="navToggle" aria-label="Toggle Navigation" onClick={toggleMenu}>
+            <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+          </button>
         </div>
       </div>
     </header>

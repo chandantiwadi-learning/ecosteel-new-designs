@@ -1,3 +1,4 @@
+const RFQ = require('../models/RFQ');
 const { sendRFQEmail } = require('../services/mailService');
 
 const handleRFQSubmit = async (req, res, next) => {
@@ -7,15 +8,8 @@ const handleRFQSubmit = async (req, res, next) => {
       company,
       email,
       phone,
-      country,
       product,
-      material,
-      grade,
-      size,
-      quantity,
-      standard,
       message,
-      preferredContact,
     } = req.body;
 
     if (!name || !email || !product) {
@@ -25,37 +19,36 @@ const handleRFQSubmit = async (req, res, next) => {
       });
     }
 
-    const attachment = req.file
-      ? {
-          filename: req.file.originalname,
-          path: req.file.path,
-        }
-      : null;
-
-    const rfqData = {
+    // Save to MongoDB
+    const newRFQ = new RFQ({
       name,
-      company: company || 'N/A',
+      company,
       email,
-      phone: phone || 'N/A',
-      country: country || 'N/A',
+      phone,
       product,
-      material: material || 'N/A',
-      grade: grade || 'N/A',
-      size: size || 'N/A',
-      quantity: quantity || 'N/A',
-      standard: standard || 'N/A',
-      message: message || 'N/A',
-      preferredContact: preferredContact || 'Email',
-      attachment,
-    };
+      message
+    });
 
-    const mailResult = await sendRFQEmail(rfqData);
+    const savedRFQ = await newRFQ.save();
+
+    // Optionally send email
+    try {
+      await sendRFQEmail({
+        name,
+        company: company || 'N/A',
+        email,
+        phone: phone || 'N/A',
+        product,
+        message: message || 'N/A',
+      });
+    } catch (mailError) {
+      console.warn("Mail sending failed, but RFQ was saved.", mailError);
+    }
 
     return res.status(200).json({
       success: true,
       message: 'Your Request for Quote (RFQ) has been received. Our sales engineering team will respond within 24 hours.',
-      inquiryId: 'RFQ-' + Date.now().toString().slice(-6),
-      data: mailResult,
+      inquiryId: savedRFQ._id,
     });
   } catch (error) {
     next(error);
