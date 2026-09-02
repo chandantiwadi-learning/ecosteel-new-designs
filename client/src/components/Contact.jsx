@@ -86,46 +86,57 @@ const Contact = () => {
       <div className="container contact-grid">
         {/* Contact Info Card */}
         <div className="contact-info-card">
-          <div>
-            <div className="eyebrow" style={{ color: 'var(--text-muted)' }}>Commercial Inquiries</div>
-            <h2>Direct Technical Sales Desk</h2>
-            <p>
-              Submit your material schedules, technical data sheets, or project specifications directly to our engineering
-              sales team.
-            </p>
-
-            <div className="contact-block">
-              <h4>Corporate Office & Correspondence</h4>
+          <iframe 
+            src="https://maps.google.com/maps?q=107/111,+Matka+Building,+Kumbharwada,+Mumbai&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            className="contact-info-map-bg"
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Google Maps Location"
+          ></iframe>
+          <div className="contact-info-overlay"></div>
+          <div className="contact-info-content">
+            <div>
+              <div className="eyebrow" style={{ color: 'var(--text-muted)' }}>Commercial Inquiries</div>
+              <h2>Direct Technical Sales Desk</h2>
               <p>
-                107/111, Matka Building, Office No. 4, Gr. Floor,<br />
-                Dr. M. G. Mahimtura Marg, 3rd Kumbharwada,<br />
-                Mumbai – 400 004, Maharashtra, India.
+                Submit your material schedules, technical data sheets, or project specifications directly to our engineering
+                sales team.
               </p>
+
+              <div className="contact-block">
+                <h4>Corporate Office & Correspondence</h4>
+                <p>
+                  107/111, Matka Building, Office No. 4, Gr. Floor,<br />
+                  Dr. M. G. Mahimtura Marg, 3rd Kumbharwada,<br />
+                  Mumbai – 400 004, Maharashtra, India.
+                </p>
+              </div>
+
+              <div className="contact-block">
+                <h4>Manufacturing Facility & Stockyard</h4>
+                <p>
+                  G7, Unit No. 11, Dhumal Nagar, Waliv,<br />
+                  Vasai East, Thane – 401208, Maharashtra, India.
+                </p>
+              </div>
+
+              <div className="contact-block">
+                <h4>Direct Lines</h4>
+                <p>
+                  Phone: <a href="tel:+912266518841">+91 22 6651 8841</a><br />
+                  Mobile: <a href="tel:+919321743595">+91 93217 43595</a><br />
+                  Email: <a href="mailto:sales@ecosteels.com">sales@ecosteels.com</a>
+                </p>
+              </div>
             </div>
 
-            <div className="contact-block">
-              <h4>Manufacturing Facility & Stockyard</h4>
-              <p>
-                G7, Unit No. 11, Dhumal Nagar, Waliv,<br />
-                Vasai East, Thane – 401208, Maharashtra, India.
-              </p>
+            <div>
+              <a href="https://maps.app.goo.gl/moMvXpwEvBwtgVtp9" target="_blank" rel="noopener noreferrer"
+                className="btn btn-white">
+                <i className="fas fa-map-marked-alt"></i> Open Location in Google Maps
+              </a>
             </div>
-
-            <div className="contact-block">
-              <h4>Direct Lines</h4>
-              <p>
-                Phone: <a href="tel:+912266518841">+91 22 6651 8841</a><br />
-                Mobile: <a href="tel:+919321743595">+91 93217 43595</a><br />
-                Email: <a href="mailto:sales@ecosteels.com">sales@ecosteels.com</a>
-              </p>
-            </div>
-          </div>
-
-          <div>
-            <a href="https://maps.google.com/?q=Mumbai+400004" target="_blank" rel="noopener noreferrer"
-              className="btn btn-white">
-              <i className="fas fa-map-marked-alt"></i> Open Location in Google Maps
-            </a>
           </div>
         </div>
 
