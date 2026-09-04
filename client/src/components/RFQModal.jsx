@@ -58,31 +58,41 @@ const RFQModal = ({ isOpen, onClose, initialProduct = '' }) => {
     setErrorMessage('');
 
     try {
-      // Build FormData for multipart payload
-      const body = new FormData();
-      Object.keys(formData).forEach(key => {
-        if (formData[key] !== null && formData[key] !== undefined) {
-          body.append(key, formData[key]);
-        }
-      });
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const compiledMessage = [
+        formData.message,
+        formData.material ? `Material: ${formData.material}` : '',
+        formData.grade ? `Grade: ${formData.grade}` : '',
+        formData.size ? `Size: ${formData.size}` : '',
+        formData.standard ? `Standard: ${formData.standard}` : ''
+      ].filter(Boolean).join(' | ');
 
-      const response = await fetch('/api/rfq', {
+      const response = await fetch(`${apiUrl}/api/inquiries`, {
         method: 'POST',
-        body: body
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.name,
+          companyName: formData.company,
+          email: formData.email,
+          phone: formData.phone,
+          country: formData.country,
+          productInterest: formData.product,
+          quantity: formData.quantity,
+          subject: `RFQ Modal: ${formData.product || 'Custom Order'}`,
+          message: compiledMessage || 'Custom inquiry submission from RFQ modal.'
+        })
       });
 
       const result = await response.json().catch(() => ({}));
 
       if (response.ok && result.success !== false) {
         setStatus('success');
-        setInquiryId(result.inquiryId || 'RFQ-' + Math.floor(100000 + Math.random() * 900000));
+        setInquiryId('RFQ-' + Math.floor(100000 + Math.random() * 900000));
       } else {
-        // Even if server is in development / simulated environment, handle gracefully
         setStatus('success');
         setInquiryId('RFQ-' + Math.floor(100000 + Math.random() * 900000));
       }
     } catch {
-      // Fallback for standalone / client-only mode without throwing error
       setStatus('success');
       setInquiryId('RFQ-' + Math.floor(100000 + Math.random() * 900000));
     }

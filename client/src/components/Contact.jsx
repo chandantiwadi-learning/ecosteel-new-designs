@@ -41,34 +41,45 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+
     try {
-      const response = await fetch('http://localhost:5000/api/rfq', {
+      const response = await fetch(`${apiUrl}/api/inquiries`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          fullName: formData.name,
+          companyName: formData.company,
+          email: formData.email,
+          phone: formData.phone,
+          productInterest: formData.product,
+          subject: `RFQ for ${formData.product}`,
+          message: formData.message
+        })
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
-      if (response.ok) {
-        setStatus({ 
-          type: 'success', 
-          message: `Thank you, ${formData.name}. Your commercial RFQ for ${formData.product} has been registered.` 
+      if (response.ok && data.success !== false) {
+        setStatus({
+          type: 'success',
+          message: data.message || `Thank you, ${formData.name}. Your inquiry has been submitted successfully.`
         });
         setFormData({ name: '', company: '', email: '', phone: '', product: '', message: '' });
       } else {
-        setStatus({ type: 'error', message: data.message || 'An error occurred during submission.' });
+        setStatus({
+          type: 'error',
+          message: data.message || 'Something went wrong. Please try again.'
+        });
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      // Fallback for UI if server is down (mock success since we are still building the server)
-      setStatus({ 
-        type: 'success', 
-        message: `Thank you, ${formData.name}. Your commercial RFQ for ${formData.product} has been registered.` 
+      setStatus({
+        type: 'error',
+        message: 'Unable to connect to the inquiry service. Please verify your connection or try again.'
       });
-      setFormData({ name: '', company: '', email: '', phone: '', product: '', message: '' });
     }
 
     setIsSubmitting(false);
@@ -86,8 +97,8 @@ const Contact = () => {
       <div className="container contact-grid">
         {/* Contact Info Card */}
         <div className="contact-info-card">
-          <iframe 
-            src="https://maps.google.com/maps?q=107/111,+Matka+Building,+Kumbharwada,+Mumbai&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          <iframe
+            src="https://maps.google.com/maps?q=HEX+INDIA+-+Hot+Forge+Bolt+Nut+Manufacturer,+Plot+No.+G4,+Forsberry+Rd,+East,+Sewri,+Mumbai,+Maharashtra+400015&t=&z=13&ie=UTF8&iwloc=&output=embed"
             className="contact-info-map-bg"
             allowFullScreen=""
             loading="lazy"
@@ -97,45 +108,29 @@ const Contact = () => {
           <div className="contact-info-overlay"></div>
           <div className="contact-info-content">
             <div>
-              <div className="eyebrow" style={{ color: 'var(--text-muted)' }}>Commercial Inquiries</div>
-              <h2>Direct Technical Sales Desk</h2>
-              <p>
-                Submit your material schedules, technical data sheets, or project specifications directly to our engineering
-                sales team.
-              </p>
-
-              <div className="contact-block">
-                <h4>Corporate Office & Correspondence</h4>
-                <p>
-                  107/111, Matka Building, Office No. 4, Gr. Floor,<br />
-                  Dr. M. G. Mahimtura Marg, 3rd Kumbharwada,<br />
-                  Mumbai – 400 004, Maharashtra, India.
-                </p>
-              </div>
-
-              <div className="contact-block">
-                <h4>Manufacturing Facility & Stockyard</h4>
-                <p>
-                  G7, Unit No. 11, Dhumal Nagar, Waliv,<br />
-                  Vasai East, Thane – 401208, Maharashtra, India.
-                </p>
-              </div>
-
-              <div className="contact-block">
-                <h4>Direct Lines</h4>
-                <p>
-                  Phone: <a href="tel:+912266518841">+91 22 6651 8841</a><br />
-                  Mobile: <a href="tel:+919321743595">+91 93217 43595</a><br />
-                  Email: <a href="mailto:sales@ecosteels.com">sales@ecosteels.com</a>
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <a href="https://maps.app.goo.gl/moMvXpwEvBwtgVtp9" target="_blank" rel="noopener noreferrer"
+              <a href="https://maps.app.goo.gl/ZrMkbSf1CoCujsF67" target="_blank" rel="noopener noreferrer"
                 className="btn btn-white">
                 <i className="fas fa-map-marked-alt"></i> Open Location in Google Maps
               </a>
+            </div>
+
+            <div className="contact-details-box">
+              <div className="contact-block">
+                <h4>Corporate Office & Correspondence</h4>
+                <p>
+                  HEX INDIA - Hot Forge Bolt Nut Manufacturer,<br />
+                  Plot No. G4, Forsberry Rd, East, Sewri,<br />
+                  Mumbai, Maharashtra 400015
+                </p>
+              </div>
+
+              <div className="contact-block" style={{ marginBottom: 0 }}>
+                <h4>Direct Lines</h4>
+                <p>
+                  Contact Number: <a href="tel:+912235346200">+91 93217 43595</a><br />
+                  Email: <a href="mailto:sales@ecosteels.com">sales@ecosteels.com</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -204,7 +199,7 @@ const Contact = () => {
           </form>
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 

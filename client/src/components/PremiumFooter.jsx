@@ -148,14 +148,14 @@ const PremiumFooter = ({ onOpenRFQ }) => {
               <div>
                 <div style={{ color: '#ffffff', fontWeight: '600', marginBottom: '0.2rem' }}>Corporate Office:</div>
                 <div style={{ color: '#94a3b8', lineHeight: '1.5' }}>
-                  107/111, Matka Building, Office 4, Gr. Floor, Dr. M. G. Mahimtura Marg, 3rd Kumbharwada, Mumbai – 400 004, MH, India.
+                  HEX INDIA - Hot Forge Bolt Nut Manufacturer, Plot No. G4, Forsberry Rd, East, Sewri, Mumbai, Maharashtra 400015
                 </div>
               </div>
 
               <div>
                 <div style={{ color: '#ffffff', fontWeight: '600', marginBottom: '0.2rem' }}>Manufacturing Facility:</div>
                 <div style={{ color: '#94a3b8', lineHeight: '1.5' }}>
-                  G7, Unit 11, Dhumal Nagar, Waliv, Vasai East, Thane – 401208, Maharashtra, India.
+                  HEX INDIA - Hot Forge Bolt Nut Manufacturer, Plot No. G4, Forsberry Rd, East, Sewri, Mumbai, Maharashtra 400015
                 </div>
               </div>
 
@@ -198,10 +198,7 @@ const PremiumFooter = ({ onOpenRFQ }) => {
           }}
         >
           <div>
-            &copy; {new Date().getFullYear()} Eco Steel Engineering. All rights reserved. Registered ISO 9001:2015 exporter.
-            <div style={{ marginTop: '0.25rem' }}>
-              Designed and Developed By <a href="https://chandan-tiwadi.pages.dev" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-green-accent)', textDecoration: 'none', fontWeight: '600' }}>Chandan Tiwadi</a>
-            </div>
+            &copy; 2026 HEX INDIA FASTENERS. All Rights Reserved. Designed by <a href="https://chandan-tiwadi.pages.dev" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-green-accent)', textDecoration: 'none', fontWeight: '600' }}>Chandan Tiwadi</a>
           </div>
 
           <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>

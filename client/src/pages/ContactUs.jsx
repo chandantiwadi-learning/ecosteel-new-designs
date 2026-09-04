@@ -12,24 +12,42 @@ const ContactUs = () => {
     message: ''
   });
   const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('loading');
+    setErrorMessage('');
+
+    const apiUrl = import.meta.env.VITE_API_URL || '';
 
     try {
-      await fetch('/api/contact', {
+      const response = await fetch(`${apiUrl}/api/inquiries`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          fullName: formData.name,
+          companyName: formData.company,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message
+        })
       });
-      setStatus('success');
-      setFormData({ name: '', company: '', email: '', phone: '', subject: '', message: '' });
-      setTimeout(() => setStatus('idle'), 5000);
+
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && data.success !== false) {
+        setStatus('success');
+        setFormData({ name: '', company: '', email: '', phone: '', subject: '', message: '' });
+        setTimeout(() => setStatus('idle'), 6000);
+      } else {
+        setStatus('error');
+        setErrorMessage(data.message || 'Something went wrong. Please try again.');
+      }
     } catch {
-      setStatus('success');
-      setFormData({ name: '', company: '', email: '', phone: '', subject: '', message: '' });
-      setTimeout(() => setStatus('idle'), 5000);
+      setStatus('error');
+      setErrorMessage('Unable to connect to the inquiry service. Please verify your connection or try again.');
     }
   };
 
@@ -87,9 +105,9 @@ const ContactUs = () => {
                     </h3>
                   </div>
                   <p style={{ color: 'var(--text-dark-secondary)', fontSize: '0.9375rem', lineHeight: '1.6', margin: 0 }}>
-                    107/111, Matka Building, Office No. 4, Ground Floor,<br />
-                    Dr. M. G. Mahimtura Marg, 3rd Kumbharwada,<br />
-                    Mumbai – 400 004, Maharashtra, India.
+                    HEX INDIA - Hot Forge Bolt Nut Manufacturer,<br />
+                    Plot No. G4, Forsberry Rd, East, Sewri,<br />
+                    Mumbai, Maharashtra 400015
                   </p>
                 </div>
 
@@ -102,9 +120,9 @@ const ContactUs = () => {
                     </h3>
                   </div>
                   <p style={{ color: 'var(--text-dark-secondary)', fontSize: '0.9375rem', lineHeight: '1.6', margin: 0 }}>
-                    G7, Unit No. 11, Dhumal Nagar,<br />
-                    Waliv, Vasai East,<br />
-                    Thane – 401208, Maharashtra, India.
+                    HEX INDIA - Hot Forge Bolt Nut Manufacturer,<br />
+                    Plot No. G4, Forsberry Rd, East, Sewri,<br />
+                    Mumbai, Maharashtra 400015
                   </p>
                 </div>
 
@@ -162,6 +180,12 @@ const ContactUs = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit}>
+                  {status === 'error' && errorMessage && (
+                    <div style={{ padding: '0.875rem 1.25rem', marginBottom: '1.25rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: 'var(--radius-sm, 4px)', color: '#b91c1c', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <i className="fas fa-exclamation-circle"></i>
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '1.25rem' }}>
                     <div className="form-group" style={{ margin: 0 }}>
                       <label className="form-label">Full Name *</label>

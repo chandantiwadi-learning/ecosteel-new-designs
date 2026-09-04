@@ -57,7 +57,7 @@ const Products = () => {
 
           <div className="products-grid">
             {filteredProducts.map(p => (
-              <div key={p.id} className="product-card">
+              <div key={p.id} id={p.id} className="product-card">
                 <div className="product-card-media">
                   <img src={p.image} alt={p.name} loading="lazy" />
                   <span className="product-category-tag">{p.badge}</span>

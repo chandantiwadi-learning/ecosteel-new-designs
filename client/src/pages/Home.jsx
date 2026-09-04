@@ -124,27 +124,32 @@ const Home = () => {
   const handleInlineSubmit = async (e) => {
     e.preventDefault();
     setInlineStatus('loading');
+    const apiUrl = import.meta.env.VITE_API_URL || '';
     try {
-      await fetch('/api/rfq', {
+      const response = await fetch(`${apiUrl}/api/inquiries`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: inlineRfq.name,
-          company: inlineRfq.company,
+          fullName: inlineRfq.name,
+          companyName: inlineRfq.company,
           email: inlineRfq.email,
           phone: inlineRfq.phone,
-          product: inlineRfq.product,
+          productInterest: inlineRfq.product,
+          subject: `RFQ for ${inlineRfq.product}`,
           message: inlineRfq.requirements
         })
       });
-      setInlineStatus('success');
-      setTimeout(() => {
-        setInlineRfq({ name: '', company: '', email: '', phone: '', product: 'Buttweld Pipe Fittings', requirements: '' });
+      if (response.ok) {
+        setInlineStatus('success');
+        setTimeout(() => {
+          setInlineRfq({ name: '', company: '', email: '', phone: '', product: 'Buttweld Pipe Fittings', requirements: '' });
+          setInlineStatus('idle');
+        }, 4000);
+      } else {
         setInlineStatus('idle');
-      }, 4000);
+      }
     } catch {
-      setInlineStatus('success');
-      setTimeout(() => setInlineStatus('idle'), 4000);
+      setInlineStatus('idle');
     }
   };
 

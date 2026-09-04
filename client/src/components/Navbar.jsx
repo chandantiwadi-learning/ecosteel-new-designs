@@ -38,18 +38,18 @@ const Navbar = () => {
                   <div className="mega-menu-col">
                     <h4>Piping & Fastening Components</h4>
                     <ul className="mega-menu-links">
-                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Buttweld Pipe Fittings</span> <span className="badge">ASME B16.9</span></a></li>
-                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Forged Fittings</span> <span className="badge">3000# - 9000#</span></a></li>
-                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Industrial Pipe Flanges</span> <span className="badge">ASME B16.5</span></a></li>
-                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>High-Tensile Fasteners</span> <span className="badge">B7 / B8 / 2H</span></a></li>
+                      <li><a href="#butt-weld-pipe-fittings" className="mega-link" onClick={closeMenu}><span>Buttweld Pipe Fittings</span> <span className="badge">ASME B16.9</span></a></li>
+                      <li><a href="#forged-fittings" className="mega-link" onClick={closeMenu}><span>Forged Fittings</span> <span className="badge">3000# - 9000#</span></a></li>
+                      <li><a href="#flanges" className="mega-link" onClick={closeMenu}><span>Industrial Pipe Flanges</span> <span className="badge">ASME B16.5</span></a></li>
+                      <li><a href="#fasteners" className="mega-link" onClick={closeMenu}><span>High-Tensile Fasteners</span> <span className="badge">B7 / B8 / 2H</span></a></li>
                     </ul>
                   </div>
                   <div className="mega-menu-col">
                     <h4>Mill Forms & Structural</h4>
                     <ul className="mega-menu-links">
-                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Pipes & Tubes</span> <span className="badge">Seamless / Welded</span></a></li>
-                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Plates, Sheets & Coils</span> <span className="badge">1mm - 200mm</span></a></li>
-                      <li><a href="#products" className="mega-link" onClick={closeMenu}><span>Rods & Round Bars</span> <span className="badge">Precision Ground</span></a></li>
+                      <li><a href="#pipes-and-tubes" className="mega-link" onClick={closeMenu}><span>Pipes & Tubes</span> <span className="badge">Seamless / Welded</span></a></li>
+                      <li><a href="#plates-and-sheets" className="mega-link" onClick={closeMenu}><span>Plates, Sheets & Coils</span> <span className="badge">1mm - 200mm</span></a></li>
+                      <li><a href="#rods" className="mega-link" onClick={closeMenu}><span>Rods & Round Bars</span> <span className="badge">Precision Ground</span></a></li>
                       <li><a href="#materials" className="mega-link" onClick={closeMenu}><span>Specialty Alloys & Superalloys</span> <span className="badge">Inconel / Monel</span></a></li>
                     </ul>
                   </div>

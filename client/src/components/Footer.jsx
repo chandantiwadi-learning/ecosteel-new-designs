@@ -47,7 +47,7 @@ const Footer = () => {
           <div className="footer-col">
             <h4>Corporate Headquarters</h4>
             <p>
-              107/111, Matka Building, Office No. 4, Dr. M. G. Mahimtura Marg, 3rd Kumbharwada, Mumbai – 400 004, India.
+              HEX INDIA - Hot Forge Bolt Nut Manufacturer, Plot No. G4, Forsberry Rd, East, Sewri, Mumbai, Maharashtra 400015
             </p>
             <p>
               <strong>Sales Phone:</strong> <a href="tel:+912266518841">+91 22 6651 8841</a> /
@@ -60,7 +60,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <span>© 2026 Eco Steel Engineering. ISO 9001:2015 Certified Manufacturer & Exporter. All Rights Reserved.</span>
+          <span>© 2026 HEX INDIA FASTENERS. All Rights Reserved. Designed by <a href="https://chandan-tiwadi.pages.dev" target="_blank" rel="noopener noreferrer">Chandan Tiwadi</a></span>
           <div>
             <a href="#home">Home</a>
             <a href="#about">About Us</a>
