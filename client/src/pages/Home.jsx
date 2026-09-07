@@ -124,7 +124,7 @@ const Home = () => {
   const handleInlineSubmit = async (e) => {
     e.preventDefault();
     setInlineStatus('loading');
-    const apiUrl = import.meta.env.VITE_API_URL || '';
+    const apiUrl = import.meta.env.VITE_API_URL || 'https://ecosteel-new-designs.onrender.com';
     try {
       const response = await fetch(`${apiUrl}/api/inquiries`, {
         method: 'POST',

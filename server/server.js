@@ -19,6 +19,7 @@ connectDB();
 // CORS Configuration
 const allowedOrigins = [
   process.env.CLIENT_URL,
+  'https://ecosteel-new-designs.vercel.app',
   'http://localhost:5173',
   'http://localhost:3000',
   'http://127.0.0.1:5173'
@@ -29,7 +30,11 @@ const corsOptions = {
     // Allow requests with no origin (such as mobile apps, Postman, curl, or server-to-server)
     if (!origin) return callback(null, true);
 
-    if (allowedOrigins.includes(origin) || NODE_ENV === 'development') {
+    if (
+      allowedOrigins.includes(origin) ||
+      origin.endsWith('.vercel.app') ||
+      NODE_ENV === 'development'
+    ) {
       return callback(null, true);
     } else {
       return callback(new Error(`CORS Policy: Origin ${origin} not allowed`));

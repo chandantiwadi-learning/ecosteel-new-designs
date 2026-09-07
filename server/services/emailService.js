@@ -71,12 +71,18 @@ const sendCustomerAutoReply = async (inquiry) => {
 </html>
   `;
 
-  return await resend.emails.send({
+  const response = await resend.emails.send({
     from: fromEmail,
     to: [recipient],
     subject: 'Thank You for Contacting Eco Steel Engineering',
     html: html
   });
+
+  if (response.error) {
+    throw new Error(`[Resend Auto-Reply Error] ${response.error.message || JSON.stringify(response.error)}`);
+  }
+
+  return response.data;
 };
 
 /**
@@ -178,12 +184,18 @@ const sendTeamNotification = async (inquiry) => {
 </html>
   `;
 
-  return await resend.emails.send({
+  const response = await resend.emails.send({
     from: fromEmail,
     to: [teamEmail],
     subject: `New Website Inquiry - ${customerName}`,
     html: html
   });
+
+  if (response.error) {
+    throw new Error(`[Resend Team Notification Error] ${response.error.message || JSON.stringify(response.error)}`);
+  }
+
+  return response.data;
 };
 
 module.exports = {

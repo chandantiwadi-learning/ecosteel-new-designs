@@ -58,7 +58,7 @@ const RFQModal = ({ isOpen, onClose, initialProduct = '' }) => {
     setErrorMessage('');
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://ecosteel-new-designs.onrender.com';
       const compiledMessage = [
         formData.message,
         formData.material ? `Material: ${formData.material}` : '',
