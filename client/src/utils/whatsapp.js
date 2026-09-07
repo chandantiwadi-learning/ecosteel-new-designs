@@ -1,7 +1,7 @@
-export const ECOSTEEL_WHATSAPP_NUMBER = '919321743595';
+export const ECOSTEEL_WHATSAPP_NUMBER = '912235346200';
 
-export const createWhatsAppUrl = ({ productName, material, grade, size, message }) => {
-  let text = `Hello Eco Steel Engineering,\n\nI am interested in your products for a commercial enquiry.`;
+export const createWhatsAppUrl = ({ productName, material, grade, size, message } = {}) => {
+  let text = `Hello ECO STEEL, I came across your website and would like to learn more about your products and services. Please share more information with me.`;
 
   if (productName) {
     text += `\n- Product: ${productName}`;

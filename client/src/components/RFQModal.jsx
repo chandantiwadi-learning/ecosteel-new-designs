@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { productsData } from '../data/products';
+import TurnstileWidget from './TurnstileWidget';
 
 const RFQModal = ({ isOpen, onClose, initialProduct = '' }) => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,8 @@ const RFQModal = ({ isOpen, onClose, initialProduct = '' }) => {
   const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('');
   const [inquiryId, setInquiryId] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef(null);
 
   useEffect(() => {
     if (initialProduct) {
@@ -37,6 +40,8 @@ const RFQModal = ({ isOpen, onClose, initialProduct = '' }) => {
       document.body.style.overflow = '';
       setStatus('idle');
       setErrorMessage('');
+      setTurnstileToken('');
+      turnstileRef.current?.reset();
     }
     return () => {
       document.body.style.overflow = '';
@@ -54,6 +59,13 @@ const RFQModal = ({ isOpen, onClose, initialProduct = '' }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!turnstileToken) {
+      setErrorMessage('Please complete the security verification (CAPTCHA).');
+      setStatus('error');
+      return;
+    }
+
     setStatus('loading');
     setErrorMessage('');
 
@@ -79,7 +91,8 @@ const RFQModal = ({ isOpen, onClose, initialProduct = '' }) => {
           productInterest: formData.product,
           quantity: formData.quantity,
           subject: `RFQ Modal: ${formData.product || 'Custom Order'}`,
-          message: compiledMessage || 'Custom inquiry submission from RFQ modal.'
+          message: compiledMessage || 'Custom inquiry submission from RFQ modal.',
+          turnstileToken: turnstileToken
         })
       });
 
@@ -88,13 +101,19 @@ const RFQModal = ({ isOpen, onClose, initialProduct = '' }) => {
       if (response.ok && result.success !== false) {
         setStatus('success');
         setInquiryId('RFQ-' + Math.floor(100000 + Math.random() * 900000));
+        setTurnstileToken('');
+        turnstileRef.current?.reset();
       } else {
-        setStatus('success');
-        setInquiryId('RFQ-' + Math.floor(100000 + Math.random() * 900000));
+        setStatus('error');
+        setErrorMessage(result.message || 'Security verification failed. Please try again.');
+        setTurnstileToken('');
+        turnstileRef.current?.reset();
       }
     } catch {
-      setStatus('success');
-      setInquiryId('RFQ-' + Math.floor(100000 + Math.random() * 900000));
+      setStatus('error');
+      setErrorMessage('Unable to connect to the inquiry service. Please verify your connection or try again.');
+      setTurnstileToken('');
+      turnstileRef.current?.reset();
     }
   };
 
@@ -356,6 +375,18 @@ const RFQModal = ({ isOpen, onClose, initialProduct = '' }) => {
                   </span>
                 </div>
 
+                <TurnstileWidget
+                  ref={turnstileRef}
+                  theme="dark"
+                  onVerify={(token) => setTurnstileToken(token)}
+                  onExpire={() => setTurnstileToken('')}
+                  onError={() => {
+                    setTurnstileToken('');
+                    setStatus('error');
+                    setErrorMessage('CAPTCHA security check failed. Please try again.');
+                  }}
+                />
+
                 {/* Actions */}
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
                   <button 
@@ -368,7 +399,7 @@ const RFQModal = ({ isOpen, onClose, initialProduct = '' }) => {
                   <button 
                     type="submit" 
                     className="btn-primary" 
-                    disabled={status === 'loading'}
+                    disabled={status === 'loading' || !turnstileToken}
                     style={{ minWidth: '220px' }}
                   >
                     {status === 'loading' ? (

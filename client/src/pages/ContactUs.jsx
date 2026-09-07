@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
+import TurnstileWidget from '../components/TurnstileWidget';
+import WhatsAppCard from '../components/WhatsAppCard';
 
 const ContactUs = () => {
   const { onOpenRFQ } = useOutletContext();
@@ -13,9 +15,18 @@ const ContactUs = () => {
   });
   const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!turnstileToken) {
+      setStatus('error');
+      setErrorMessage('Please complete the security verification (CAPTCHA).');
+      return;
+    }
+
     setStatus('loading');
     setErrorMessage('');
 
@@ -31,7 +42,8 @@ const ContactUs = () => {
           email: formData.email,
           phone: formData.phone,
           subject: formData.subject,
-          message: formData.message
+          message: formData.message,
+          turnstileToken: turnstileToken
         })
       });
 
@@ -40,14 +52,20 @@ const ContactUs = () => {
       if (response.ok && data.success !== false) {
         setStatus('success');
         setFormData({ name: '', company: '', email: '', phone: '', subject: '', message: '' });
+        setTurnstileToken('');
+        turnstileRef.current?.reset();
         setTimeout(() => setStatus('idle'), 6000);
       } else {
         setStatus('error');
-        setErrorMessage(data.message || 'Something went wrong. Please try again.');
+        setErrorMessage(data.message || 'Security verification failed. Please try again.');
+        setTurnstileToken('');
+        turnstileRef.current?.reset();
       }
     } catch {
       setStatus('error');
       setErrorMessage('Unable to connect to the inquiry service. Please verify your connection or try again.');
+      setTurnstileToken('');
+      turnstileRef.current?.reset();
     }
   };
 
@@ -135,24 +153,17 @@ const ContactUs = () => {
                     </h3>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.9375rem' }}>
-                    <div><strong>Head Office:</strong> <a href="tel:+912266518841" style={{ color: 'var(--text-dark-primary)', fontWeight: '600' }}>+91 22 6651 8841</a></div>
-                    <div><strong>Mobile / Urgent:</strong> <a href="tel:+919321743595" style={{ color: 'var(--text-dark-primary)', fontWeight: '600' }}>+91 93217 43595</a></div>
+                    <div><strong>Head Office & Commercial Sales:</strong> <a href="tel:+912235346200" style={{ color: 'var(--text-dark-primary)', fontWeight: '600' }}>+91 22 3534 6200</a></div>
                     <div><strong>Corporate Email:</strong> <a href="mailto:sales@ecosteels.com" style={{ color: 'var(--brand-green)', fontWeight: '700' }}>sales@ecosteels.com</a></div>
                   </div>
                 </div>
 
+                {/* WhatsApp Chat Now Card */}
+                <WhatsAppCard theme="light" title="DIRECT WHATSAPP DESK" />
+
               </div>
 
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <a 
-                  href="https://wa.me/919321743595?text=Hello%20Eco%20Steel%20Engineering,%20I%20would%20like%20to%20connect%20with%20your%20sales%20desk."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary"
-                  style={{ backgroundColor: '#22c55e', borderColor: '#22c55e' }}
-                >
-                  <i className="fab fa-whatsapp"></i> Chat on WhatsApp
-                </a>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
                 <button className="btn-secondary" onClick={() => onOpenRFQ()}>
                   <i className="fas fa-file-contract"></i> Launch RFQ Wizard
                 </button>
@@ -260,10 +271,21 @@ const ContactUs = () => {
                     ></textarea>
                   </div>
 
+                  <TurnstileWidget
+                    ref={turnstileRef}
+                    onVerify={(token) => setTurnstileToken(token)}
+                    onExpire={() => setTurnstileToken('')}
+                    onError={() => {
+                      setTurnstileToken('');
+                      setStatus('error');
+                      setErrorMessage('CAPTCHA security check failed. Please try again.');
+                    }}
+                  />
+
                   <button 
                     type="submit" 
                     className="btn-primary" 
-                    disabled={status === 'loading'}
+                    disabled={status === 'loading' || !turnstileToken}
                     style={{ width: '100%', padding: '1rem' }}
                   >
                     {status === 'loading' ? (

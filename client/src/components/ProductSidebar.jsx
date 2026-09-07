@@ -38,8 +38,8 @@ const ProductSidebar = ({ currentProductId, onOpenRFQ }) => {
         <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.8)', marginBottom: '20px' }}>
           Our engineering team is ready to help you select the right materials and dimensions.
         </p>
-        <a href="tel:+919321743595" style={{ display: 'block', color: 'var(--text-inverse)', textDecoration: 'none', fontWeight: '600', fontSize: '18px', marginBottom: '16px' }}>
-          <i className="fas fa-phone-alt" style={{ color: 'var(--brand-blue-light)', marginRight: '8px' }}></i> +91 93217 43595
+        <a href="tel:+912235346200" style={{ display: 'block', color: 'var(--text-inverse)', textDecoration: 'none', fontWeight: '600', fontSize: '18px', marginBottom: '16px' }}>
+          <i className="fas fa-phone-alt" style={{ color: 'var(--brand-blue-light)', marginRight: '8px' }}></i> +91 22 3534 6200
         </a>
         <button onClick={() => onOpenRFQ()} className="btn-primary" style={{ width: '100%', justifyContent: 'center', background: 'var(--brand-blue)' }}>
           Request a Callback

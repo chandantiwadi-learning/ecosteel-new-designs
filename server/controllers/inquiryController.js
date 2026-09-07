@@ -67,6 +67,53 @@ const createInquiry = async (req, res, next) => {
       });
     }
 
+    // 4. Security Verification: Cloudflare Turnstile CAPTCHA token verification
+    const turnstileToken = req.body.turnstileToken;
+    const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+
+    if (!turnstileToken) {
+      return res.status(403).json({
+        success: false,
+        message: 'Security verification failed: CAPTCHA token is missing. Please complete the CAPTCHA.'
+      });
+    }
+
+    if (turnstileSecret) {
+      try {
+        const clientIp = req.headers['x-forwarded-for']?.split(',')[0] || req.socket?.remoteAddress;
+
+        const verificationResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            secret: turnstileSecret,
+            response: turnstileToken,
+            remoteip: clientIp
+          })
+        });
+
+        const verificationData = await verificationResponse.json();
+
+        if (!verificationData.success) {
+          console.warn('[Turnstile Error] Siteverify failed:', verificationData['error-codes'] || verificationData);
+          return res.status(403).json({
+            success: false,
+            message: 'CAPTCHA verification failed. Please try again.'
+          });
+        }
+      } catch (turnstileErr) {
+        console.error('[Turnstile API Network Error]', turnstileErr);
+        return res.status(500).json({
+          success: false,
+          message: 'Security verification service temporary error. Please try again.'
+        });
+      }
+    } else {
+      console.warn('[Turnstile Warning] TURNSTILE_SECRET_KEY is not set in environment variables. Token present, skipping remote verification.');
+    }
+
     // Guard: Verify MongoDB URI is configured
     if (!process.env.MONGODB_URI) {
       console.error('[Inquiry Error] MONGODB_URI is not defined in environment variables.');
@@ -78,7 +125,7 @@ const createInquiry = async (req, res, next) => {
       });
     }
 
-    // 4. Save inquiry to MongoDB
+    // 5. Save inquiry to MongoDB
     const inquiry = await Inquiry.create({
       fullName: resolvedFullName,
       email: resolvedEmail,

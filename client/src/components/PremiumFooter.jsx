@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { productsData } from '../data/products';
 import { materialsData } from '../data/materials';
+import WhatsAppCard from './WhatsAppCard';
 
 const PremiumFooter = ({ onOpenRFQ }) => {
   return (
@@ -160,11 +161,8 @@ const PremiumFooter = ({ onOpenRFQ }) => {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', paddingTop: '0.5rem', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
-                <a href="tel:+912266518841" style={{ color: '#cbd5e1', textDecoration: 'none' }}>
-                  <i className="fas fa-phone-alt" style={{ color: 'var(--brand-green-accent)', width: '18px' }}></i> +91 22 6651 8841
-                </a>
-                <a href="tel:+919321743595" style={{ color: '#cbd5e1', textDecoration: 'none' }}>
-                  <i className="fas fa-mobile-alt" style={{ color: 'var(--brand-green-accent)', width: '18px' }}></i> +91 93217 43595
+                <a href="tel:+912235346200" style={{ color: '#cbd5e1', textDecoration: 'none' }}>
+                  <i className="fas fa-phone-alt" style={{ color: 'var(--brand-green-accent)', width: '18px' }}></i> +91 22 3534 6200
                 </a>
                 <a href="mailto:sales@ecosteels.com" style={{ color: '#cbd5e1', textDecoration: 'none' }}>
                   <i className="fas fa-envelope" style={{ color: 'var(--brand-blue)', width: '18px' }}></i> sales@ecosteels.com

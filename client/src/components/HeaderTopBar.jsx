@@ -33,11 +33,11 @@ const HeaderTopBar = () => {
         {/* Right Contact Quick-Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
           <a 
-            href="tel:+912266518841" 
+            href="tel:+912235346200" 
             style={{ color: '#cbd5e1', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.35rem', transition: 'color 0.2s' }}
             className="hide-mobile"
           >
-            <i className="fas fa-phone-alt" style={{ color: 'var(--brand-green-accent)', fontSize: '0.75rem' }}></i> +91 22 6651 8841
+            <i className="fas fa-phone-alt" style={{ color: 'var(--brand-green-accent)', fontSize: '0.75rem' }}></i> +91 22 3534 6200
           </a>
           <a 
             href="mailto:sales@ecosteels.com" 
@@ -46,7 +46,7 @@ const HeaderTopBar = () => {
             <i className="fas fa-envelope" style={{ color: 'var(--brand-blue)', fontSize: '0.75rem' }}></i> sales@ecosteels.com
           </a>
           <a 
-            href="https://wa.me/919321743595?text=Hello%20Eco%20Steel%20Engineering,%20I%20would%20like%20to%20inquire%20about%20your%20piping%20products." 
+            href="https://wa.me/912235346200?text=Hello%20ECO%20STEEL,%20I%20came%20across%20your%20website%20and%20would%20like%20to%20learn%20more%20about%20your%20products%20and%20services.%20Please%20share%20more%20information%20with%20me." 
             target="_blank" 
             rel="noopener noreferrer" 
             style={{ 

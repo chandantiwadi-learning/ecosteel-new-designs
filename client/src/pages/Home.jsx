@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { productsData } from '../data/products';
 import { materialsData } from '../data/materials';
 import { industriesData } from '../data/industries';
 import { standardsData } from '../data/standards';
+import TurnstileWidget from '../components/TurnstileWidget';
 
 // Subtle Animation Variants
 const fadeInUp = {
@@ -57,6 +58,8 @@ const Home = () => {
     requirements: ''
   });
   const [inlineStatus, setInlineStatus] = useState('idle');
+  const [inlineTurnstileToken, setInlineTurnstileToken] = useState('');
+  const inlineTurnstileRef = useRef(null);
 
   // Density lookup (g/cm3)
   const densities = {
@@ -123,6 +126,11 @@ const Home = () => {
 
   const handleInlineSubmit = async (e) => {
     e.preventDefault();
+
+    if (!inlineTurnstileToken) {
+      return;
+    }
+
     setInlineStatus('loading');
     const apiUrl = import.meta.env.VITE_API_URL || 'https://ecosteel-new-designs.onrender.com';
     try {
@@ -136,20 +144,28 @@ const Home = () => {
           phone: inlineRfq.phone,
           productInterest: inlineRfq.product,
           subject: `RFQ for ${inlineRfq.product}`,
-          message: inlineRfq.requirements
+          message: inlineRfq.requirements,
+          turnstileToken: inlineTurnstileToken
         })
       });
-      if (response.ok) {
+      const data = await response.json().catch(() => ({}));
+      if (response.ok && data.success !== false) {
         setInlineStatus('success');
+        setInlineTurnstileToken('');
+        inlineTurnstileRef.current?.reset();
         setTimeout(() => {
           setInlineRfq({ name: '', company: '', email: '', phone: '', product: 'Buttweld Pipe Fittings', requirements: '' });
           setInlineStatus('idle');
         }, 4000);
       } else {
         setInlineStatus('idle');
+        setInlineTurnstileToken('');
+        inlineTurnstileRef.current?.reset();
       }
     } catch {
       setInlineStatus('idle');
+      setInlineTurnstileToken('');
+      inlineTurnstileRef.current?.reset();
     }
   };
 
@@ -1148,7 +1164,7 @@ const Home = () => {
                   <div>
                     <div style={{ color: '#ffffff', fontWeight: '700', fontSize: '1rem', marginBottom: '0.2rem' }}>Direct Lines & Dispatch</div>
                     <div style={{ color: '#cbd5e1', fontSize: '0.9375rem' }}>
-                      Tel: <a href="tel:+912266518841" style={{ color: '#ffffff' }}>+91 22 6651 8841</a> &bull; Mobile: <a href="tel:+919321743595" style={{ color: '#ffffff' }}>+91 93217 43595</a>
+                      Tel / Contact: <a href="tel:+912235346200" style={{ color: '#ffffff' }}>+91 22 3534 6200</a>
                     </div>
                     <div style={{ color: 'var(--brand-green-accent)', fontSize: '0.875rem', marginTop: '0.25rem' }}>
                       Email: <a href="mailto:sales@ecosteels.com" style={{ color: 'var(--brand-green-accent)' }}>sales@ecosteels.com</a>
@@ -1250,10 +1266,18 @@ const Home = () => {
                     ></textarea>
                   </div>
 
+                  <TurnstileWidget
+                    ref={inlineTurnstileRef}
+                    theme="dark"
+                    onVerify={(token) => setInlineTurnstileToken(token)}
+                    onExpire={() => setInlineTurnstileToken('')}
+                    onError={() => setInlineTurnstileToken('')}
+                  />
+
                   <button 
                     type="submit" 
                     className="btn-primary" 
-                    disabled={inlineStatus === 'loading'}
+                    disabled={inlineStatus === 'loading' || !inlineTurnstileToken}
                     style={{ width: '100%' }}
                   >
                     {inlineStatus === 'loading' ? 'Transmitting RFQ...' : 'Submit Inquiry to Sales Desk'}

@@ -567,7 +567,7 @@ const PremiumNavbar = ({ onOpenRFQ, onOpenSearch }) => {
                     <i className="fas fa-file-contract"></i> Request Official RFQ
                   </button>
                   <a
-                    href="https://wa.me/919321743595"
+                    href="https://wa.me/912235346200?text=Hello%20ECO%20STEEL,%20I%20came%20across%20your%20website%20and%20would%20like%20to%20learn%20more%20about%20your%20products%20and%20services.%20Please%20share%20more%20information%20with%20me."
                     target="_blank"
                     rel="noreferrer"
                     style={{

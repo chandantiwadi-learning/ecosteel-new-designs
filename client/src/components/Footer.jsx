@@ -1,4 +1,5 @@
 import React from 'react';
+import WhatsAppCard from './WhatsAppCard';
 
 const Footer = () => {
   return (
@@ -47,11 +48,10 @@ const Footer = () => {
           <div className="footer-col">
             <h4>Corporate Headquarters</h4>
             <p>
-              HEX INDIA - Hot Forge Bolt Nut Manufacturer, Plot No. G4, Forsberry Rd, East, Sewri, Mumbai, Maharashtra 400015
+              ECO STEEL ENGINEERING - Plot No. G4, Forsberry Rd, East, Sewri, Mumbai, Maharashtra 400015
             </p>
             <p>
-              <strong>Sales Phone:</strong> <a href="tel:+912266518841">+91 22 6651 8841</a> /
-              <a href="tel:+919321743595"> +91 93217 43595</a>
+              <strong>Sales Phone:</strong> <a href="tel:+912235346200">+91 22 3534 6200</a>
             </p>
             <p>
               <strong>Email:</strong> <a href="mailto:sales@ecosteels.com">sales@ecosteels.com</a>
@@ -60,7 +60,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <span>© 2026 HEX INDIA FASTENERS. All Rights Reserved. Designed by <a href="https://chandan-tiwadi.pages.dev" target="_blank" rel="noopener noreferrer">Chandan Tiwadi</a></span>
+          <span>© 2026 Eco Steel Engineering. All Rights Reserved. Designed by <a href="https://chandan-tiwadi.pages.dev" target="_blank" rel="noopener noreferrer">Chandan Tiwadi</a></span>
           <div>
             <a href="#home">Home</a>
             <a href="#about">About Us</a>
