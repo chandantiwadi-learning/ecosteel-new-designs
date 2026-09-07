@@ -70,7 +70,7 @@ const PremiumNavbar = ({ onOpenRFQ, onOpenSearch }) => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              height: isScrolled ? '72px' : '84px',
+              height: isScrolled ? '80px' : '105px',
               transition: 'height 0.3s ease'
             }}
           >
@@ -85,7 +85,7 @@ const PremiumNavbar = ({ onOpenRFQ, onOpenSearch }) => {
                 src="/img/new-eco_logo.png"
                 alt="Eco Steel Engineering Logo"
                 style={{
-                  height: isScrolled ? '42px' : '48px',
+                  height: isScrolled ? '52px' : '62px',
                   width: 'auto',
                   transition: 'height 0.3s ease'
                 }}

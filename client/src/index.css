@@ -317,14 +317,14 @@ textarea {
 }
 
 .navbar.scrolled .navbar-inner {
-  height: 70px;
+  height: 80px;
 }
 
 .navbar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 90px;
+  height: 105px;
   transition: height var(--transition-fast);
 }
 
@@ -336,9 +336,14 @@ textarea {
 }
 
 .logo-brand img {
-  height: 48px;
+  height: 62px;
   width: auto;
   object-fit: contain;
+  transition: height var(--transition-fast);
+}
+
+.navbar.scrolled .logo-brand img {
+  height: 52px;
 }
 
 .nav-menu {
