@@ -112,13 +112,13 @@ const Contact = () => {
   return (
     <section className="section section-offwhite" id="contact">
       <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
-        
+
         {/* Equal 50-50 Split Row: Left = Contact Info & WhatsApp, Right = RFQ Form */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '2.5rem', alignItems: 'stretch' }}>
-          
+
           {/* Left Side: Contact Info Card + WhatsApp Card */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', justifyContent: 'space-between' }}>
-            
+
             {/* Corporate Address & Contact Info Card */}
             <div
               style={{
@@ -139,7 +139,7 @@ const Contact = () => {
                   Corporate Office & Correspondence
                 </div>
                 <h3 style={{ fontSize: '1.375rem', color: '#ffffff', marginBottom: '0.75rem', fontFamily: 'var(--font-display)' }}>
-                  HEX INDIA - Hot Forge Bolt Nut Manufacturer
+                  ECO STEEL ENGINEERING
                 </h3>
                 <p style={{ color: '#cbd5e1', fontSize: '0.9375rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>
                   <i className="fas fa-map-marker-alt" style={{ color: '#38bdf8', marginRight: '0.5rem' }}></i>
