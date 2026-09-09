@@ -33,6 +33,7 @@ const corsOptions = {
     if (
       allowedOrigins.includes(origin) ||
       origin.endsWith('.vercel.app') ||
+      origin.includes('hostinger') ||
       NODE_ENV === 'development'
     ) {
       return callback(null, true);

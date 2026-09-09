@@ -51,7 +51,7 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
-    const apiUrl = import.meta.env.VITE_API_URL || 'https://ecosteel-new-designs.onrender.com';
+    const apiUrl = import.meta.env.VITE_API_URL || '';
 
     try {
       const response = await fetch(`${apiUrl}/api/inquiries`, {
