@@ -32,8 +32,8 @@ const corsOptions = {
 
     if (
       allowedOrigins.includes(origin) ||
+      origin === 'https://darkgreen-pigeon-333508.hostingersite.com' ||
       origin.endsWith('.vercel.app') ||
-      origin.includes('hostinger') ||
       NODE_ENV === 'development'
     ) {
       return callback(null, true);
@@ -59,6 +59,20 @@ app.get('/', (req, res) => {
     version: '1.0.0',
     description: 'Production B2B Inquiry Service',
     status: 'online'
+  });
+});
+
+// Temporary route debugging mechanism
+app.get('/api/routes-debug', (req, res) => {
+  res.json({
+    message: 'Debug endpoint reached',
+    registeredRoutes: app._router.stack
+      .filter(r => r.route || r.name === 'router')
+      .map(r => ({
+        path: r.route?.path || 'router middleware',
+        name: r.name,
+        regexp: r.regexp?.toString()
+      }))
   });
 });
 
