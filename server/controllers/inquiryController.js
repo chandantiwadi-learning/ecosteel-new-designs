@@ -4,6 +4,78 @@ const { sendCustomerAutoReply, sendTeamNotification } = require('../services/ema
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
+ * Reusable server-side Turnstile verification
+ * Uses URLSearchParams as recommended by Cloudflare
+ */
+async function verifyTurnstile(token, remoteIp) {
+  console.log('[Turnstile Debug] Verification started');
+  console.log('[Turnstile Debug] Token present:', !!token);
+  if (token) {
+    console.log('[Turnstile Debug] Token length:', token.length);
+    console.log('[Turnstile Debug] Token type:', typeof token);
+    console.log('[Turnstile Debug] Token prefix:', typeof token === 'string' ? token.substring(0, 10) + '...' : 'N/A');
+  }
+
+  if (!token) {
+    return {
+      success: false,
+      errorCodes: ["missing-input-response"]
+    };
+  }
+
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  console.log('[Turnstile Debug] Secret configured:', !!secret);
+
+  if (!secret) {
+    console.error("[Turnstile] TURNSTILE_SECRET_KEY is missing in backend environment");
+    return {
+      success: false,
+      errorCodes: ["server-misconfiguration"]
+    };
+  }
+
+  const formData = new URLSearchParams();
+  formData.append("secret", secret);
+  formData.append("response", token);
+
+  if (remoteIp) {
+    formData.append("remoteip", remoteIp);
+  }
+
+  console.log('[Turnstile Debug] Endpoint: https://challenges.cloudflare.com/turnstile/v0/siteverify');
+
+  try {
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await response.json();
+
+    console.log("[Turnstile Debug] Cloudflare response:", {
+      httpStatus: response.status,
+      success: result.success,
+      errorCodes: result["error-codes"] || [],
+      hostname: result.hostname || null,
+      action: result.action || null
+    });
+
+    return {
+      success: result.success,
+      errorCodes: result["error-codes"] || [],
+      hostname: result.hostname,
+      action: result.action
+    };
+  } catch (err) {
+    console.error("[Turnstile Debug] Fetch Error:", err.message);
+    return {
+      success: false,
+      errorCodes: ["network-error"]
+    };
+  }
+}
+
+/**
  * Handle website inquiry / contact form submission
  * POST /api/inquiries
  */
@@ -69,49 +141,19 @@ const createInquiry = async (req, res, next) => {
 
     // 4. Security Verification: Cloudflare Turnstile CAPTCHA token verification
     const turnstileToken = req.body.turnstileToken;
-    const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+    const clientIp = req.headers['x-forwarded-for']?.split(',')[0] || req.socket?.remoteAddress;
+    
+    console.log('[Turnstile Debug] Request origin:', req.headers.origin || 'unknown');
+    console.log('[Turnstile Debug] Request hostname:', req.hostname || 'unknown');
 
-    if (!turnstileToken) {
+    const verificationResult = await verifyTurnstile(turnstileToken, clientIp);
+
+    if (!verificationResult.success) {
       return res.status(403).json({
         success: false,
-        message: 'Security verification failed: CAPTCHA token is missing. Please complete the CAPTCHA.'
+        error: 'Turnstile verification failed',
+        errorCodes: verificationResult.errorCodes
       });
-    }
-
-    if (turnstileSecret) {
-      try {
-        const clientIp = req.headers['x-forwarded-for']?.split(',')[0] || req.socket?.remoteAddress;
-
-        const verificationResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            secret: turnstileSecret,
-            response: turnstileToken,
-            remoteip: clientIp
-          })
-        });
-
-        const verificationData = await verificationResponse.json();
-
-        if (!verificationData.success) {
-          console.warn('[Turnstile Error] Siteverify failed:', verificationData['error-codes'] || verificationData);
-          return res.status(403).json({
-            success: false,
-            message: 'CAPTCHA verification failed. Please try again.'
-          });
-        }
-      } catch (turnstileErr) {
-        console.error('[Turnstile API Network Error]', turnstileErr);
-        return res.status(500).json({
-          success: false,
-          message: 'Security verification service temporary error. Please try again.'
-        });
-      }
-    } else {
-      console.warn('[Turnstile Warning] TURNSTILE_SECRET_KEY is not set in environment variables. Token present, skipping remote verification.');
     }
 
     // Guard: Verify MongoDB URI is configured
