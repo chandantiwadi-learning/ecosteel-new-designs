@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 
 const TURNSTILE_SCRIPT_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
-// Default Cloudflare Turnstile test sitekey (always passes) used if VITE_TURNSTILE_SITE_KEY is not defined in .env
-const DEFAULT_TEST_SITE_KEY = '1x00000000000000000000AA';
-
 let scriptLoadingPromise = null;
 
 const loadTurnstileScript = () => {
@@ -48,7 +45,11 @@ const loadTurnstileScript = () => {
 const TurnstileWidget = forwardRef(({ onVerify, onExpire, onError, theme = 'auto' }, ref) => {
   const containerRef = useRef(null);
   const widgetIdRef = useRef(null);
-  const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || DEFAULT_TEST_SITE_KEY;
+  const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
+
+  if (!siteKey) {
+    console.error('CRITICAL ERROR: VITE_TURNSTILE_SITE_KEY is missing from the environment variables. Turnstile cannot load.');
+  }
 
   const reset = () => {
     if (widgetIdRef.current !== null && window.turnstile) {
@@ -70,6 +71,13 @@ const TurnstileWidget = forwardRef(({ onVerify, onExpire, onError, theme = 'auto
     loadTurnstileScript()
       .then((turnstile) => {
         if (!isMounted || !containerRef.current) return;
+
+        if (!siteKey) {
+          if (containerRef.current) {
+            containerRef.current.innerHTML = '<div style="color: red; border: 1px solid red; padding: 10px;">Security Configuration Error: Turnstile Site Key is missing. Please contact the site administrator.</div>';
+          }
+          return;
+        }
 
         // Clear previous widget instance if re-rendering
         if (widgetIdRef.current !== null) {
